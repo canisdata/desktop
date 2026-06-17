@@ -50,3 +50,20 @@ appstore: clean
 
 clean:
 	rm -rf $(build_dir)
+
+dist_dir = $(build_dir)/dist
+
+.PHONY: dist install
+
+# Plain, unsigned app folder for a local test instance (no tarball, no signing).
+dist: clean
+	@mkdir -p $(dist_dir)/$(app_name)
+	tar -cf - $(exclude) -C $(CURDIR) . | tar -xf - -C $(dist_dir)/$(app_name)
+	@echo "App folder ready: $(dist_dir)/$(app_name)"
+
+# Copy it straight into a Nextcloud apps dir:
+#   make install DEST=/var/www/html/nextcloud/custom_apps
+install: dist
+	@test -n "$(DEST)" || { echo "Usage: make install DEST=/path/to/custom_apps"; exit 1; }
+	rsync -a --delete $(dist_dir)/$(app_name) $(DEST)/
+	@echo "Installed to $(DEST)/$(app_name)"
