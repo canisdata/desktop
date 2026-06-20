@@ -668,6 +668,9 @@ body:has(#desktop-root) .header-menu__wrapper {
 .desktop-fav-badge { position: absolute; left: -2px; bottom: -2px; width: 18px; height: 18px; line-height: 0; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)); pointer-events: none; }
 .desktop-fav-badge svg { width: 18px; height: 18px; display: block; }
 .desktop-fav-badge svg path { fill: var(--color-favorite, #a37200); }
+.desktop-fav-badge-shared { right: -4px; left: auto; bottom: -1px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-main-background, #fff); box-shadow: 0 1px 3px var(--color-box-shadow, rgba(0, 0, 0, 0.35)); display: inline-flex; align-items: center; justify-content: center; }
+.desktop-fav-badge-shared svg { width: 14px; height: 14px; }
+.desktop-fav-badge-shared svg path { fill: var(--color-primary-element, #00679e); }
 .desktop-fav.is-cut { opacity: 0.5; }
 .desktop-fav-label { font-size: var(--default-font-size, 13px); line-height: 1.2; max-width: 112px; word-break: break-word; color: var(--color-main-text, #f5f5f5); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 #desktop-root.desktop-theme-light .desktop-fav-label { text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.7); }
@@ -690,8 +693,10 @@ body:has(#desktop-root) .header-menu__wrapper {
 .desktop-fav[data-special] .desktop-fav-icon img, .desktop-fav[data-special] .desktop-fav-icon svg { width: 34px; height: 34px; }
 .desktop-fav[data-special="trash"].is-drop-target .desktop-fav-icon { outline: 2px solid var(--color-primary-element, #0a7cff); outline-offset: 2px; background: var(--color-primary-element-light, rgba(10, 124, 255, 0.25)); }
 #desktop-favorites.desktop-drop-active { outline: 2px dashed var(--color-primary-element, #0a7cff); outline-offset: -8px; border-radius: var(--border-radius-container, 12px); }
+#desktop-favorites.desktop-drop-disabled { background: rgba(128, 128, 128, 0.5); }
 .desktop-upload-overlay { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 80; pointer-events: none; }
 .desktop-upload-card { min-width: 280px; max-width: 60vw; padding: 12px 16px; background: var(--color-main-background, #fff); color: var(--color-main-text, #222); border: 1px solid var(--color-border, #d0d0d0); border-radius: var(--border-radius-container, 12px); box-shadow: 0 6px 20px var(--color-box-shadow, rgba(0, 0, 0, 0.25)); }
+.desktop-upload-card-blocked { text-align: center; font-weight: 600; }
 .desktop-upload-text { font-size: var(--font-size-small, 13px); margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .desktop-upload-bar { height: 6px; border-radius: var(--border-radius-pill, 100px); background: var(--color-background-dark, #e0e0e0); overflow: hidden; }
 .desktop-upload-fill { height: 100%; width: 0; background: var(--color-primary-element, #0a7cff); transition: width 0.15s ease; }

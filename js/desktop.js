@@ -1274,6 +1274,8 @@
         if (isNativeAccountMenuAction(link)) return null;                                // account overlays/logout stay native
         if (link.hasAttribute('aria-haspopup') || link.getAttribute('aria-expanded') !== null) return null; // a menu toggle
         if (link.hasAttribute('download')) return null;
+        const rawHref = link.getAttribute('href') || '';
+        if (rawHref === '#' || rawHref.endsWith('#')) return null;                        // native no-op/overlay anchors stay native
         let url;
         try { url = new URL(link.href, window.location.origin); } catch (e) { return null; }
         if (url.origin !== window.location.origin) return null;                          // external origin → leave alone
@@ -1289,7 +1291,7 @@
     }
 
     function bindNativeAccountMenuControls() {
-        document.querySelectorAll('#desktop-header-end-slot button:has(.qrcode-scan-icon), #desktop-header-end-slot a[href="#"]:has(.user-status-icon)').forEach((control) => {
+        document.querySelectorAll('button:has(.qrcode-scan-icon), a[href="#"]:has(.user-status-icon)').forEach((control) => {
             if (control.dataset.desktopNativeBound === 'true') return;
             control.dataset.desktopNativeBound = 'true';
             // NcListItem/account-menu controls can be closed by ancestor pointer handling before their
@@ -1507,8 +1509,28 @@
         const deselectIcon = (el) => { selection.delete(el); el.classList.remove('is-selected'); };
         const clearSelection = () => { selection.forEach((i) => i.classList.remove('is-selected')); selection.clear(); };
 
+        function isGroupFolderItem(item) {
+            const mount = String(item.mountType || '').toLowerCase();
+            return mount.includes('group') || mount.includes('team');
+        }
+        function folderMime(item) {
+            const mount = String(item.mountType || '').toLowerCase();
+            if (mount.includes('external')) return 'dir-external';
+            if ((item.shareTypes || []).length || item.sharedByOther || isGroupFolderItem(item)) return 'dir-shared';
+            return 'dir';
+        }
+        function isSharedItem(item) {
+            const uid = (OC.getCurrentUser && OC.getCurrentUser() || {}).uid || '';
+            const owner = String(item.ownerId || '');
+            return !!((item.shareTypes || []).length || item.sharedByOther || isGroupFolderItem(item) || (uid && owner && owner !== uid));
+        }
+        function shareBadgeTitle(item) {
+            if (isGroupFolderItem(item)) return t('Group folder');
+            if (item.ownerDisplayName) return t('Shared by {owner}', { owner: item.ownerDisplayName });
+            return t('Shared');
+        }
         function favVisual(item) {
-            const mime = item.isFolder ? 'dir' : (item.mime || 'application/octet-stream');
+            const mime = item.isFolder ? folderMime(item) : (item.mime || 'application/octet-stream');
             const fb = (OC.MimeType && OC.MimeType.getIconUrl) ? OC.MimeType.getIconUrl(mime) : '';
             if (!item.isFolder && item.fileId && OC.generateUrl) {
                 const url = OC.generateUrl('/core/preview?fileId={id}&x=64&y=64&a=1&mimeFallback=true', { id: String(item.fileId) });
@@ -1517,6 +1539,7 @@
             return `<img src="${fb}" alt="" draggable="false">`;
         }
         const STAR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#a37200" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>';
+        const SHARED_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16,13C18.21,13 20,14.79 20,17C20,19.21 18.21,21 16,21C14.14,21 12.57,19.73 12.13,18H7.87C7.43,19.73 5.86,21 4,21C1.79,21 0,19.21 0,17C0,14.79 1.79,13 4,13C5.86,13 7.43,14.27 7.87,16H12.13C12.35,15.13 12.85,14.37 13.54,13.84L8.91,9.21C8.36,9.7 7.64,10 6.85,10C5.1,10 3.7,8.6 3.7,6.85C3.7,5.1 5.1,3.7 6.85,3.7C8.6,3.7 10,5.1 10,6.85C10,7.64 9.7,8.36 9.21,8.91L13.84,13.54C14.47,13.2 15.2,13 16,13M16,15A2,2 0 0,0 14,17A2,2 0 0,0 16,19A2,2 0 0,0 18,17A2,2 0 0,0 16,15M4,15A2,2 0 0,0 2,17A2,2 0 0,0 4,19A2,2 0 0,0 6,17A2,2 0 0,0 4,15Z"/></svg>';
         function makeIcon(item) {
             const el = document.createElement('div');
             el.className = 'desktop-fav';
@@ -1532,8 +1555,9 @@
             const visual = item.special
                 ? (item.svg || `<img src="${item.iconUrl}" alt="" draggable="false"${item.iconFallback ? ` data-fallback="${escapeHtml(item.iconFallback)}"` : ''}>`)
                 : favVisual(item);
-            const badge = item.favorited ? `<span class="desktop-fav-badge">${STAR_SVG}</span>` : '';
-            el.innerHTML = `<span class="desktop-fav-icon">${visual}${badge}</span><span class="desktop-fav-label">${escapeHtml(item.name)}</span>`;
+            const favoriteBadge = item.favorited ? `<span class="desktop-fav-badge desktop-fav-badge-favorite">${STAR_SVG}</span>` : '';
+            const sharedBadge = !item.special && isSharedItem(item) ? `<span class="desktop-fav-badge desktop-fav-badge-shared" title="${escapeHtml(shareBadgeTitle(item))}">${SHARED_SVG}</span>` : '';
+            el.innerHTML = `<span class="desktop-fav-icon">${visual}${favoriteBadge}${sharedBadge}</span><span class="desktop-fav-label">${escapeHtml(item.name)}</span>`;
             // CSP-safe image fallback (inline onerror handlers are blocked by Nextcloud's CSP).
             el.querySelectorAll('img[data-fallback]').forEach((img) => {
                 img.addEventListener('error', function onErr() {
@@ -1590,7 +1614,7 @@
             const folderRel = folderPath.replace(/^\/+|\/+$/g, '');
             const body = '<?xml version="1.0"?>'
                 + '<d:propfind xmlns:d="DAV:" xmlns:oc="http://owncloud.org/ns" xmlns:nc="http://nextcloud.org/ns">'
-                + '<d:prop><oc:fileid/><d:resourcetype/><d:getcontenttype/><oc:favorite/></d:prop>'
+                + '<d:prop><oc:fileid/><d:resourcetype/><d:getcontenttype/><oc:favorite/><oc:share-types/><oc:owner-id/><oc:owner-display-name/><nc:mount-type/></d:prop>'
                 + '</d:propfind>';
             const res = await fetch(davUrl(folderRel), {
                 method: 'PROPFIND',
@@ -1611,12 +1635,19 @@
                 const idEl = r.getElementsByTagNameNS('http://owncloud.org/ns', 'fileid')[0];
                 const mimeEl = r.getElementsByTagNameNS('DAV:', 'getcontenttype')[0];
                 const favEls = r.getElementsByTagNameNS('http://owncloud.org/ns', 'favorite');
+                const shareTypes = Array.from(r.getElementsByTagNameNS('http://owncloud.org/ns', 'share-type')).map((n) => (n.textContent || '').trim()).filter(Boolean);
+                const mountType = r.getElementsByTagNameNS('http://nextcloud.org/ns', 'mount-type')[0]?.textContent?.trim() || '';
+                const ownerId = r.getElementsByTagNameNS('http://owncloud.org/ns', 'owner-id')[0]?.textContent?.trim() || '';
+                const ownerDisplayName = r.getElementsByTagNameNS('http://owncloud.org/ns', 'owner-display-name')[0]?.textContent?.trim() || '';
+                const uid = (OC.getCurrentUser && OC.getCurrentUser() || {}).uid || '';
+                const sharedByOther = !!(uid && ownerId && ownerId !== uid);
                 let favorited = false;
                 for (const fe of Array.from(favEls)) { if ((fe.textContent || '').trim() === '1') { favorited = true; break; } }
                 items.push({
                     path, name: path.split('/').pop(),
                     fileId: idEl ? idEl.textContent.trim() : '',
                     isFolder, mime: mimeEl ? mimeEl.textContent.trim() : '',
+                    shareTypes, mountType, ownerId, ownerDisplayName, sharedByOther,
                     favorited,
                     kind: 'file',
                 });
@@ -2047,17 +2078,50 @@
                 xhr.send(file);
             });
         }
-        function makeUploadOverlay() {
+        function makeUploadOverlay({ blocked = false } = {}) {
             const el = document.createElement('div');
-            el.className = 'desktop-upload-overlay';
-            el.innerHTML = '<div class="desktop-upload-card"><div class="desktop-upload-text"></div><div class="desktop-upload-bar"><div class="desktop-upload-fill"></div></div></div>';
+            el.className = blocked ? 'desktop-upload-overlay desktop-upload-overlay-blocked' : 'desktop-upload-overlay';
+            el.innerHTML = blocked
+                ? `<div class="desktop-upload-card desktop-upload-card-blocked"><div class="desktop-upload-text">${escapeHtml(t('Set a desktop folder to enable drag and drop uploads.'))}</div></div>`
+                : '<div class="desktop-upload-card"><div class="desktop-upload-text"></div><div class="desktop-upload-bar"><div class="desktop-upload-fill"></div></div></div>';
             stage.appendChild(el);
             const text = el.querySelector('.desktop-upload-text');
             const fill = el.querySelector('.desktop-upload-fill');
             return {
-                update(idx, total, name, pct) { text.textContent = t('Uploading {index}/{total}: {name} ({pct}%)', { index: idx, total, name, pct }); fill.style.width = `${pct}%`; },
+                update(idx, total, name, pct) { if (fill) { text.textContent = t('Uploading {index}/{total}: {name} ({pct}%)', { index: idx, total, name, pct }); fill.style.width = `${pct}%`; } },
                 remove() { el.remove(); },
             };
+        }
+        function isExternalFileDrag(dataTransfer) {
+            if (!dataTransfer) return false;
+            const types = Array.from(dataTransfer.types || []).map((type) => String(type).toLowerCase());
+            // Real browser drops often expose only the protected "Files" type until the final drop.
+            if (types.includes('files') || types.includes('application/x-moz-file')) return true;
+            if (dataTransfer.files && dataTransfer.files.length) return true;
+            return Array.from(dataTransfer.items || []).some((item) => item.kind === 'file');
+        }
+        function dropIsInsideDesktop(event) {
+            return !!(event.target && root.contains(event.target));
+        }
+        let noDesktopFolderDropOverlay = null;
+        function showNoDesktopFolderDropHint() {
+            layer.classList.add('desktop-drop-active', 'desktop-drop-disabled');
+            if (!noDesktopFolderDropOverlay) noDesktopFolderDropOverlay = makeUploadOverlay({ blocked: true });
+        }
+        function hideNoDesktopFolderDropHint() {
+            layer.classList.remove('desktop-drop-disabled');
+            if (noDesktopFolderDropOverlay) {
+                noDesktopFolderDropOverlay.remove();
+                noDesktopFolderDropOverlay = null;
+            }
+        }
+        function handleNoDesktopFolderFileDrop(event) {
+            if (desktopFolder || !isExternalFileDrag(event.dataTransfer) || !dropIsInsideDesktop(event)) return false;
+            event.preventDefault();
+            event.stopPropagation();
+            if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+            hideNoDesktopFolderDropHint();
+            return true;
         }
         async function uploadFilesToDesktop(fileList) {
             const files = Array.from(fileList || []);
@@ -2073,39 +2137,57 @@
             favoritesReload();
             broadcastFilesReload();
         }
-        if (desktopFolder) {
-            const targetDir = desktopFolder.replace(/^\/+|\/+$/g, '');
-            stage.addEventListener('dragover', (e) => {
-                if (!e.dataTransfer) return;
-                e.preventDefault();
-                const isFiles = Array.from(e.dataTransfer.types || []).includes('Files');
-                e.dataTransfer.dropEffect = isFiles ? 'copy' : 'move';
+        const handleDesktopDragOver = (e) => {
+            if (!e.dataTransfer || !dropIsInsideDesktop(e)) return;
+            const isFiles = isExternalFileDrag(e.dataTransfer);
+            if (!isFiles && !desktopFolder) return;
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = desktopFolder ? (isFiles ? 'copy' : 'move') : 'none';
+            if (desktopFolder) {
+                hideNoDesktopFolderDropHint();
                 layer.classList.add('desktop-drop-active');
-            });
-            stage.addEventListener('dragleave', (e) => { if (e.target === stage) layer.classList.remove('desktop-drop-active'); });
-            stage.addEventListener('drop', async (e) => {
+            } else if (isFiles) {
+                showNoDesktopFolderDropHint();
+            }
+        };
+        root.addEventListener('dragover', handleDesktopDragOver, true);
+        stage.addEventListener('dragover', handleDesktopDragOver);
+        stage.addEventListener('dragleave', (e) => {
+            if (e.target === stage) {
                 layer.classList.remove('desktop-drop-active');
-                if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
-                    e.preventDefault();
-                    uploadFilesToDesktop(e.dataTransfer.files);
-                    return;
-                }
-                if (!dfEnabled) return; // cross-window moves only when the file manager is enabled
-                const raw = (e.dataTransfer && e.dataTransfer.getData('text/plain') || '').trim();
-                if (!raw) return;
+                hideNoDesktopFolderDropHint();
+            }
+        });
+        const handleDesktopDrop = async (e) => {
+            layer.classList.remove('desktop-drop-active');
+            if (handleNoDesktopFolderFileDrop(e)) return;
+            hideNoDesktopFolderDropHint();
+            const hasComputerFiles = isExternalFileDrag(e.dataTransfer);
+            if (hasComputerFiles) {
                 e.preventDefault();
-                const paths = raw.split('\n').map((s) => s.trim()).filter(Boolean);
-                for (const p of paths) {
-                    const name = p.split('/').pop();
-                    const parent = p.split('/').slice(0, -1).join('/').replace(/^\/+/, '');
-                    if (parent === targetDir) continue; // already in the desktop folder
-                    try { await davMove(p, `${targetDir}/${name}`); } // eslint-disable-line no-await-in-loop
-                    catch (err) { debugLog('cross_drop_in_failed', { message: err.message }); }
-                }
-                favoritesReload();
-                broadcastFilesReload();
-            });
-        }
+                e.stopPropagation();
+                uploadFilesToDesktop(e.dataTransfer.files);
+                return;
+            }
+            if (!desktopFolder || !dfEnabled) return; // cross-window moves only when the file manager is enabled
+            const targetDir = desktopFolder.replace(/^\/+|\/+$/g, '');
+            const raw = (e.dataTransfer && e.dataTransfer.getData('text/plain') || '').trim();
+            if (!raw) return;
+            e.preventDefault();
+            const paths = raw.split('\n').map((s) => s.trim()).filter(Boolean);
+            for (const p of paths) {
+                const name = p.split('/').pop();
+                const parent = p.split('/').slice(0, -1).join('/').replace(/^\/+/, '');
+                if (parent === targetDir) continue; // already in the desktop folder
+                try { await davMove(p, `${targetDir}/${name}`); } // eslint-disable-line no-await-in-loop
+                catch (err) { debugLog('cross_drop_in_failed', { message: err.message }); }
+            }
+            favoritesReload();
+            broadcastFilesReload();
+        };
+        root.addEventListener('drop', handleDesktopDrop, true);
+        stage.addEventListener('drop', handleDesktopDrop);
 
         // Desktop icons are moved with pointer events only — they never use native HTML5 drag.
         // Cancel any native drag that tries to start inside the icon layer (e.g. a fast mouse flick

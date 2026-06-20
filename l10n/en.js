@@ -201,7 +201,11 @@ OC.L10N.register(
     "All desktop settings were reset. Reload the desktop to apply.": "All desktop settings were reset. Reload the desktop to apply.",
     "Reset all desktop settings? This cannot be undone.": "Reset all desktop settings? This cannot be undone.",
     "Changes are applied immediately.": "Changes are applied immediately.",
-    "Properties": "Properties"
+    "Properties": "Properties",
+    "Set a desktop folder to enable drag and drop uploads.": "Set a desktop folder to enable drag and drop uploads.",
+    "Shared": "Shared",
+    "Shared by {owner}": "Shared by {owner}",
+    "Group folder": "Group folder"
 },
-    "nplurals=2; plural=(n != 1);"
+"nplurals=2; plural=(n != 1);"
 );

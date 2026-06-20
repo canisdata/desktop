@@ -5,7 +5,7 @@
     <name>Desktop Environment</name>
     <summary>A desktop-like shell for Nextcloud apps</summary>
     <description>Browser-contained desktop shell for Nextcloud: app windows, taskbar, clock/date, and a built-in file manager (the Files module). Open Nextcloud apps as draggable windows instead of juggling browser tabs.</description>
-    <version>0.12.4</version>
+    <version>0.12.5</version>
     <licence>agpl</licence>
     <author>Puppy</author>
     <namespace>Desktop</namespace>

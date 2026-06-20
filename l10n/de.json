@@ -200,7 +200,11 @@
         "All desktop settings were reset. Reload the desktop to apply.": "Alle Desktop-Einstellungen wurden zurückgesetzt. Lade den Desktop neu, um die Änderung anzuwenden.",
         "Reset all desktop settings? This cannot be undone.": "Alle Desktop-Einstellungen zurücksetzen? Das kann nicht rückgängig gemacht werden.",
         "Changes are applied immediately.": "Änderungen werden sofort übernommen.",
-        "Properties": "Eigenschaften"
+        "Properties": "Eigenschaften",
+        "Set a desktop folder to enable drag and drop uploads.": "Lege einen Desktop-Ordner fest, um Drag-and-drop-Uploads zu aktivieren.",
+        "Shared": "Geteilt",
+        "Shared by {owner}": "Geteilt von {owner}",
+        "Group folder": "Gruppenordner"
     },
     "pluralForm": "nplurals=2; plural=(n != 1);"
 }

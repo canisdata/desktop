@@ -241,13 +241,13 @@ class SettingsController extends Controller {
         }
         if ($desktop_folder !== null) {
             $path = trim($desktop_folder);
-            if ($path === '' || $path === '/') {
+            if ($path === '') {
                 $this->config->deleteUserValue($uid, self::APP_ID, self::DESKTOP_FOLDER_KEY);
                 $result['desktopFolder'] = '';
             } else {
                 try {
                     $userFolder = $this->rootFolder->getUserFolder($uid);
-                    $node = $userFolder->get($path);
+                    $node = $path === '/' ? $userFolder : $userFolder->get($path);
                     if (!($node instanceof Folder)) {
                         return new JSONResponse(['status' => 'error', 'message' => 'not_a_folder'], 400);
                     }

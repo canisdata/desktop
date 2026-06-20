@@ -3,6 +3,14 @@
 All notable changes to the Desktop app are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## 0.12.5 – 2026-06-20
+
+### Fixed
+- **Account-menu no-op and overlay actions stay native.** Clicking the username keeps Nextcloud's default `href="#"` no-op behavior, while QR-code and User Status overlay controls are not converted into desktop windows.
+- **The account root can be chosen as the desktop folder.** Choosing `/` is now saved as the active desktop folder instead of being treated like “no folder selected”.
+- **Desktop folder icons better match Nextcloud Files.** Folder icons now use WebDAV share, owner, and mount metadata, so shared, group, and external/team-mounted folders use Nextcloud-style folder icons plus a shared-status badge.
+- **Dropping computer files without a desktop folder no longer opens them in the browser.** The desktop now cancels the browser default from file `DataTransfer` items as well as populated file lists, and shows the normal drop frame with a grey disabled fill and a short notice while dragging, then ignores the drop. The handler runs at the desktop shell capture layer so drops on icons or child elements are caught too.
+
 ## 0.12.4 – 2026-06-19
 
 ### Changed

@@ -201,7 +201,11 @@ OC.L10N.register(
     "All desktop settings were reset. Reload the desktop to apply.": "Tous les paramètres du bureau ont été réinitialisés. Rechargez le bureau pour appliquer.",
     "Reset all desktop settings? This cannot be undone.": "Réinitialiser tous les paramètres du bureau ? Cette action est irréversible.",
     "Changes are applied immediately.": "Les modifications sont appliquées immédiatement.",
-    "Properties": "Propriétés"
+    "Properties": "Propriétés",
+    "Set a desktop folder to enable drag and drop uploads.": "Définissez un dossier de bureau pour activer les téléversements par glisser-déposer.",
+    "Shared": "Partagé",
+    "Shared by {owner}": "Partagé par {owner}",
+    "Group folder": "Dossier de groupe"
 },
-    "nplurals=2; plural=(n > 1);"
+"nplurals=2; plural=(n > 1);"
 );

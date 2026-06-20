@@ -34,7 +34,7 @@ $l = \OC::$server->getL10N('desktop_workspace');
     </p>
 
     <h3><?= p($l->t('Desktop folder')) ?></h3>
-    <p class="settings-hint"><?= p($l->t('Pick one of your own folders to show its contents on the desktop. Only folders you own can be used — folders shared with you are not allowed. Leave empty to show favorites instead.')) ?></p>
+    <p class="settings-hint"><?= p($l->t('Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.')) ?></p>
     <p>
         <input type="text" id="desktop-folder-path" readonly value="<?= p($_['desktopFolder'] ?? '') ?>" placeholder="<?= p($l->t('No desktop folder selected')) ?>" style="min-width:240px;max-width:420px;" />
         <button id="desktop-folder-pick" type="button"><?= p($l->t('Choose folder…')) ?></button>
