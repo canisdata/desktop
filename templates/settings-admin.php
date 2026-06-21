@@ -6,7 +6,7 @@ style('desktop_workspace', 'admin');
 $l = \OC::$server->getL10N('desktop_workspace');
 ?>
 <div id="desktop-admin-settings" class="section" data-save-url="<?= p($_['saveUrl']) ?>">
-    <h2><?= p($l->t('Desktop Environment')) ?></h2>
+    <h2><?= p($l->t('Desktop Workspace')) ?></h2>
     <p class="settings-hint"><?= p($l->t('Configure the browser-contained desktop shell.')) ?></p>
 
     <h3><?= p($l->t('Experimental Desktop File Manager')) ?></h3>

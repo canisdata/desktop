@@ -2,7 +2,6 @@
     "translations": {
         "Desktop Files": "Fichiers du bureau",
         "This file manager is part of the desktop environment and is intended to be opened from the apps menu.": "Ce gestionnaire de fichiers fait partie de l’environnement de bureau et doit être ouvert depuis le menu des apps.",
-        "Open Desktop Environment": "Ouvrir l’environnement de bureau",
         "Up": "Remonter",
         "Refresh": "Actualiser",
         "Open in Files": "Ouvrir dans Fichiers",
@@ -87,7 +86,6 @@
         "No matches": "Aucun résultat",
         "Refresh content": "Actualiser le contenu",
         "Version %s": "Version %s",
-        "Desktop Environment": "Environnement de bureau",
         "Configure the browser-contained desktop shell.": "Configurer l’environnement de bureau dans le navigateur.",
         "Experimental Desktop File Manager": "Gestionnaire de fichiers Desktop expérimental",
         "Disable experimental Desktop File Manager for everyone": "Désactiver le gestionnaire de fichiers Desktop expérimental pour tout le monde",
@@ -209,7 +207,9 @@
         "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.": "Choisissez un dossier dont le contenu sera affiché sur le bureau. Choisissez le dossier Fichiers de premier niveau pour utiliser la racine de votre compte, ou laissez vide pour afficher les favoris à la place.",
         "Reset debug log": "Réinitialiser le journal de débogage",
         "Clear the desktop debug log? This cannot be undone.": "Effacer le journal de débogage du bureau ? Cette action est irréversible.",
-        "Debug log cleared.": "Journal de débogage effacé."
+        "Debug log cleared.": "Journal de débogage effacé.",
+        "Open Desktop Workspace": "Ouvrir l’espace de travail du bureau",
+        "Desktop Workspace": "Espace de travail du bureau"
     },
     "pluralForm": "nplurals=2; plural=(n > 1);"
 }

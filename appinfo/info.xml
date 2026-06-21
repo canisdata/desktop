@@ -2,11 +2,11 @@
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>desktop_workspace</id>
-    <name>Desktop Environment</name>
+    <name>Desktop Workspace</name>
     <summary>Open Nextcloud apps in a desktop-style workspace.</summary>
-    <description><![CDATA[Desktop Environment adds a browser-contained workspace to Nextcloud with app windows, a taskbar, desktop icons, saved window and icon state, and optional desktop-folder/file-manager features.
+    <description><![CDATA[Desktop Workspace adds a browser-contained workspace to Nextcloud with app windows, a taskbar, desktop icons, saved window and icon state, and optional desktop-folder/file-manager features.
 
-Admins can enable the app like any other Nextcloud app and configure the experimental file manager, multiple-window behavior, debug logging, and per-user resets from the Desktop Environment admin settings. Users can adjust their own desktop icons, desktop folder, window state, and reset options from the Desktop personal settings.]]></description>
+Admins can enable the app like any other Nextcloud app and configure the experimental file manager, multiple-window behavior, debug logging, and per-user resets from the Desktop Workspace admin settings. Users can adjust their own desktop icons, desktop folder, window state, and reset options from the Desktop personal settings.]]></description>
     <version>0.12.6</version>
     <licence>AGPL-3.0-or-later</licence>
     <author homepage="https://canisdata.de/">canisdata</author>

@@ -2,7 +2,6 @@
     "translations": {
         "Desktop Files": "Desktop-Dateien",
         "This file manager is part of the desktop environment and is intended to be opened from the apps menu.": "Dieser Dateimanager ist Teil der Desktop-Umgebung und soll über das Apps-Menü geöffnet werden.",
-        "Open Desktop Environment": "Desktop-Umgebung öffnen",
         "Up": "Nach oben",
         "Refresh": "Aktualisieren",
         "Open in Files": "In Dateien öffnen",
@@ -87,7 +86,6 @@
         "No matches": "Keine Treffer",
         "Refresh content": "Inhalt aktualisieren",
         "Version %s": "Version %s",
-        "Desktop Environment": "Desktop-Umgebung",
         "Configure the browser-contained desktop shell.": "Konfiguriere die im Browser laufende Desktop-Oberfläche.",
         "Experimental Desktop File Manager": "Experimenteller Desktop-Dateimanager",
         "Disable experimental Desktop File Manager for everyone": "Experimentellen Desktop-Dateimanager für alle deaktivieren",
@@ -209,7 +207,9 @@
         "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.": "Wähle einen Ordner, dessen Inhalt auf dem Desktop angezeigt wird. Wähle den obersten Dateien-Ordner, um dein Konto-Stammverzeichnis zu verwenden, oder lasse das Feld leer, um stattdessen Favoriten zu zeigen.",
         "Reset debug log": "Debug-Protokoll zurücksetzen",
         "Clear the desktop debug log? This cannot be undone.": "Desktop-Debug-Protokoll leeren? Dies kann nicht rückgängig gemacht werden.",
-        "Debug log cleared.": "Debug-Protokoll geleert."
+        "Debug log cleared.": "Debug-Protokoll geleert.",
+        "Open Desktop Workspace": "Desktop-Arbeitsbereich öffnen",
+        "Desktop Workspace": "Desktop-Arbeitsbereich"
     },
     "pluralForm": "nplurals=2; plural=(n != 1);"
 }

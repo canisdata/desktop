@@ -13,7 +13,7 @@ $l = \OC::$server->getL10N('desktop_workspace');
         <section class="desktop-files-standalone-block">
             <h1><?= p($l->t('Desktop Files')) ?></h1>
             <p><?= p($l->t('This file manager is part of the desktop environment and is intended to be opened from the apps menu.')) ?></p>
-            <p><a class="button primary" href="<?= p($_['desktopUrl']) ?>"><?= p($l->t('Open Desktop Environment')) ?></a></p>
+            <p><a class="button primary" href="<?= p($_['desktopUrl']) ?>"><?= p($l->t('Open Desktop Workspace')) ?></a></p>
         </section>
     <?php else: ?>
         <!-- Toolbar grid mirrors the main columns: "Tree View" over the tree, the rest over the folder content. -->

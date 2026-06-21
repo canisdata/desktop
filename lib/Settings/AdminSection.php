@@ -20,7 +20,7 @@ class AdminSection implements IIconSection {
     }
 
     public function getName(): string {
-        return $this->l->t('Desktop Environment');
+        return $this->l->t('Desktop Workspace');
     }
 
     public function getPriority(): int {

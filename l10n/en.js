@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "Desktop Files": "Desktop Files",
     "This file manager is part of the desktop environment and is intended to be opened from the apps menu.": "This file manager is part of the desktop environment and is intended to be opened from the apps menu.",
-    "Open Desktop Environment": "Open Desktop Environment",
     "Up": "Up",
     "Refresh": "Refresh",
     "Open in Files": "Open in Files",
@@ -88,7 +87,6 @@ OC.L10N.register(
     "No matches": "No matches",
     "Refresh content": "Refresh content",
     "Version %s": "Version %s",
-    "Desktop Environment": "Desktop Environment",
     "Configure the browser-contained desktop shell.": "Configure the browser-contained desktop shell.",
     "Experimental Desktop File Manager": "Experimental Desktop File Manager",
     "Disable experimental Desktop File Manager for everyone": "Disable experimental Desktop File Manager for everyone",
@@ -210,7 +208,9 @@ OC.L10N.register(
     "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.": "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.",
     "Reset debug log": "Reset debug log",
     "Clear the desktop debug log? This cannot be undone.": "Clear the desktop debug log? This cannot be undone.",
-    "Debug log cleared.": "Debug log cleared."
+    "Debug log cleared.": "Debug log cleared.",
+    "Open Desktop Workspace": "Open Desktop Workspace",
+    "Desktop Workspace": "Desktop Workspace"
 },
     "nplurals=2; plural=(n != 1);"
 );

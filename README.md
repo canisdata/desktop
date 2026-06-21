@@ -1,4 +1,4 @@
-# Desktop Environment for Nextcloud
+# Desktop Workspace for Nextcloud
 
 A browser-contained **desktop shell** for Nextcloud. Instead of juggling browser tabs, open
 Nextcloud apps as draggable, resizable windows on a familiar desktop — with a taskbar, a clock,
@@ -79,7 +79,7 @@ Place the resulting `desktop` folder in your Nextcloud apps directory and enable
 
 ### Admin settings
 
-**Administration settings → Desktop Environment**:
+**Administration settings → Desktop Workspace**:
 
 - Enable/disable the **experimental Desktop Files** manager (optionally per group).
 - Configure **multiple-window** behavior per app.
