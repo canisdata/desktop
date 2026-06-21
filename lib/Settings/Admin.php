@@ -73,6 +73,7 @@ class Admin implements ISettings {
             'weeklyStats' => $this->statsService->weeklyCounts(4),
             'saveUrl' => $this->urlGenerator->linkToRoute('desktop_workspace.settings.saveAdminSettings'),
             'resetUserUrl' => $this->urlGenerator->linkToRoute('desktop_workspace.settings.resetUserSettings'),
+            'resetLogUrl' => $this->urlGenerator->linkToRoute('desktop_workspace.settings.resetDebugLog'),
             'logPath' => $dataDir . '/' . SettingsController::LOG_FILE,
         ]);
     }

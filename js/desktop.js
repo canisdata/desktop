@@ -607,6 +607,21 @@
         return Boolean(link.closest('[id*="unified-search"], [class*="unified-search"], [class*="search-result"], [class*="search__result"]'));
     }
 
+    function isNotificationPopoverInteraction(event, link) {
+        const notificationRoot = link.closest('#notifications, [id*="notification"], [class*="notification"]');
+        if (!notificationRoot) return false;
+        const url = normalizeDesktopHref(link.href || link.getAttribute('href'));
+        if (!url) return true;
+        // Nextcloud notifications use in-popover controls/expanders that can be anchors.
+        // Let those native handlers run so the popover stays open; only route actual
+        // notification target links to a desktop window.
+        if (link.hasAttribute('aria-expanded') || link.closest('[aria-expanded]')) return true;
+        if (event.target.closest('button, [role="button"], [data-action], [class*="expand"], [class*="toggle"]')) return true;
+        const text = (link.textContent || '').trim();
+        if (!text && !link.querySelector('img, svg')) return true;
+        return false;
+    }
+
     function handleDesktopLinkClick(event) {
         const link = event.target.closest?.('a[href]');
         if (!link) return;
@@ -614,6 +629,7 @@
         const inMovedHeaderMenu = Boolean(headerEndSlot?.contains(link));
         const inSearchResult = isUnifiedSearchResultLink(link);
         if (!inMovedHeaderMenu && !inSearchResult) return;
+        if (isNotificationPopoverInteraction(event, link)) return;
         if (!normalizeDesktopHref(link.href || link.getAttribute('href'))) return;
         event.preventDefault();
         event.stopPropagation();

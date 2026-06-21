@@ -12,6 +12,7 @@ return [
         ['name' => 'settings#resetWindowStates', 'url' => '/settings/windowstates/reset', 'verb' => 'POST'],
         ['name' => 'settings#resetAllPersonal', 'url' => '/settings/personal/reset', 'verb' => 'POST'],
         ['name' => 'settings#resetUserSettings', 'url' => '/settings/admin/resetuser', 'verb' => 'POST'],
+        ['name' => 'settings#resetDebugLog', 'url' => '/settings/admin/resetlog', 'verb' => 'POST'],
         ['name' => 'settings#debug', 'url' => '/debug', 'verb' => 'POST'],
 
         // Files module (formerly the standalone "desktopfiles" app)

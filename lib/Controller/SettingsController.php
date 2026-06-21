@@ -191,6 +191,21 @@ class SettingsController extends Controller {
     }
 
     /**
+     * Admin only: truncate the shared desktop debug log.
+     */
+    public function resetDebugLog(): JSONResponse {
+        $path = $this->getLogPath();
+        $dir = dirname($path);
+        if (!is_dir($dir) || !is_writable($dir)) {
+            return new JSONResponse(['status' => 'error', 'message' => 'log_directory_not_writable'], 500);
+        }
+        if (@file_put_contents($path, '') === false) {
+            return new JSONResponse(['status' => 'error', 'message' => 'log_file_not_writable'], 500);
+        }
+        return new JSONResponse(['status' => 'ok', 'logFile' => $path]);
+    }
+
+    /**
      * @NoAdminRequired
      */
     public function savePersonalSettings(

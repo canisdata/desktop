@@ -7,7 +7,7 @@
     const tr = (s, p) => (window.OC && OC.L10N ? OC.L10N.translate('desktop_workspace', s, p) : s);
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-    const debugCb = document.getElementById('desktop-debug-disabled');
+    const debugCb = document.getElementById('desktop-debug-enabled');
     const expDisabledCb = document.getElementById('desktop-exp-disabled');
     const groupsSelect = document.getElementById('desktop-exp-groups');
     const button = document.getElementById('desktop-save-admin-settings');
@@ -104,6 +104,36 @@
             button.disabled = false;
         }
     });
+
+    // Reset the shared desktop debug log without changing the debug-enabled flag.
+    const resetLogBtn = document.getElementById('desktop-reset-debug-log');
+    const resetLogStatus = document.getElementById('desktop-reset-debug-log-status');
+    if (resetLogBtn) {
+        resetLogBtn.addEventListener('click', async () => {
+            if (!window.confirm(tr('Clear the desktop debug log? This cannot be undone.'))) return;
+            resetLogStatus.textContent = tr('Saving…');
+            resetLogBtn.disabled = true;
+            try {
+                const body = new URLSearchParams();
+                body.set('requesttoken', OC.requestToken);
+                const response = await fetch(resetLogBtn.dataset.resetUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', requesttoken: OC.requestToken },
+                    body,
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok || data.status === 'error') {
+                    resetLogStatus.textContent = tr('Save failed: {msg}', { msg: data.message || ('HTTP ' + response.status) });
+                    return;
+                }
+                resetLogStatus.textContent = tr('Debug log cleared.');
+            } catch (error) {
+                resetLogStatus.textContent = tr('Save failed: {msg}', { msg: error.message });
+            } finally {
+                resetLogBtn.disabled = false;
+            }
+        });
+    }
 
     // Reset a single user's desktop settings.
     const resetUserBtn = document.getElementById('desktop-reset-user');

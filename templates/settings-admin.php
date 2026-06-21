@@ -51,6 +51,10 @@ $l = \OC::$server->getL10N('desktop_workspace');
         <?= p($l->t('Log file:')) ?> <code><?= p($_['logPath']) ?></code><br />
         <?= p($l->t('From the host:')) ?> <code>docker exec nc33-app tail -n 200 <?= p($_['logPath']) ?></code>
     </p>
+    <p>
+        <button id="desktop-reset-debug-log" type="button" class="error" data-reset-url="<?= p($_['resetLogUrl']) ?>"><?= p($l->t('Reset debug log')) ?></button>
+        <span id="desktop-reset-debug-log-status" class="desktop-admin-status" aria-live="polite"></span>
+    </p>
 
     <button id="desktop-save-admin-settings" type="button" class="primary"><?= p($l->t('Save')) ?></button>
     <span id="desktop-admin-settings-status" class="desktop-admin-status" aria-live="polite"></span>

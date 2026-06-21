@@ -205,7 +205,12 @@ OC.L10N.register(
     "Set a desktop folder to enable drag and drop uploads.": "Set a desktop folder to enable drag and drop uploads.",
     "Shared": "Shared",
     "Shared by {owner}": "Shared by {owner}",
-    "Group folder": "Group folder"
+    "Group folder": "Group folder",
+    "Open Nextcloud Files in a new tab": "Open Nextcloud Files in a new tab",
+    "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.": "Pick a folder to show its contents on the desktop. Choose the top-level Files folder to use your account root, or leave empty to show favorites instead.",
+    "Reset debug log": "Reset debug log",
+    "Clear the desktop debug log? This cannot be undone.": "Clear the desktop debug log? This cannot be undone.",
+    "Debug log cleared.": "Debug log cleared."
 },
-"nplurals=2; plural=(n != 1);"
+    "nplurals=2; plural=(n != 1);"
 );

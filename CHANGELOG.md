@@ -3,6 +3,16 @@
 All notable changes to the Desktop app are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## 0.12.6 – 2026-06-21
+
+### Added
+- **Admins can reset the desktop debug log.** The Desktop Environment admin settings now include a reset button that truncates the shared debug log without changing the debug-enabled setting.
+
+### Fixed
+- **Debug logging can be disabled again.** The admin settings script now reads the rendered debug checkbox id, so saving after unchecking debug logging no longer fails with a null checkbox error.
+- **Notification popover interactions stay native.** Expanding or toggling notification content from the moved taskbar bell no longer closes the popover; only real notification target links are routed into desktop windows.
+- **Missing desktop translations filled in.** The English, German and French l10n files now cover all statically detected translated strings, including the new debug-log reset labels.
+
 ## 0.12.5 – 2026-06-20
 
 ### Fixed
