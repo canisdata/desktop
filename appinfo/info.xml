@@ -3,13 +3,23 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>desktop_workspace</id>
     <name>Desktop Environment</name>
-    <summary>A desktop-like shell for Nextcloud apps</summary>
-    <description>Browser-contained desktop shell for Nextcloud: app windows, taskbar, clock/date, and a built-in file manager (the Files module). Open Nextcloud apps as draggable windows instead of juggling browser tabs.</description>
+    <summary>Open Nextcloud apps in a desktop-style workspace.</summary>
+    <description><![CDATA[Desktop Environment adds a browser-contained workspace to Nextcloud with app windows, a taskbar, desktop icons, saved window and icon state, and optional desktop-folder/file-manager features.
+
+Admins can enable the app like any other Nextcloud app and configure the experimental file manager, multiple-window behavior, debug logging, and per-user resets from the Desktop Environment admin settings. Users can adjust their own desktop icons, desktop folder, window state, and reset options from the Desktop personal settings.]]></description>
     <version>0.12.6</version>
-    <licence>agpl</licence>
-    <author>Puppy</author>
+    <licence>AGPL-3.0-or-later</licence>
+    <author homepage="https://canisdata.de/">canisdata</author>
     <namespace>Desktop</namespace>
     <category>customization</category>
+    <documentation>
+        <user>https://github.com/canisdata/desktop_workspace#readme</user>
+        <admin>https://github.com/canisdata/desktop_workspace#readme</admin>
+    </documentation>
+    <website>https://github.com/canisdata/desktop_workspace</website>
+    <bugs>https://github.com/canisdata/desktop_workspace/issues</bugs>
+    <repository>https://github.com/canisdata/desktop_workspace</repository>
+    <screenshot small-thumbnail="https://raw.githubusercontent.com/canisdata/desktop_workspace/main/screenshots/Desktop_in_NC_003_thumbnail.png">https://raw.githubusercontent.com/canisdata/desktop_workspace/main/screenshots/Desktop_in_NC_003.png</screenshot>
     <dependencies>
         <nextcloud min-version="33" max-version="34" />
     </dependencies>
