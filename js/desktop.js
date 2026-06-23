@@ -525,13 +525,45 @@
         menu.querySelector('button')?.focus();
     }
 
-    function closeWindow(id) {
+    function removeWindowEntry(id, reason = 'window_closed') {
         const entry = windows.get(id);
         if (!entry) return;
         entry.window.remove();
         entry.task.remove();
         windows.delete(id);
         saveState();
+        debugLog(reason, { appId: id, appName: entry.app?.name || '' });
+    }
+
+    function prepareIframeForClose(entry) {
+        const iframe = entry?.window?.querySelector('iframe');
+        if (!iframe) return false;
+        let requested = false;
+        try {
+            iframe.contentWindow?.postMessage({ type: 'nextcloud-desktop:prepare-close', appId: entry.app?.id || '' }, window.location.origin);
+            requested = true;
+        } catch (error) {
+            debugLog('iframe_prepare_close_post_failed', { appId: entry.app?.id || '', message: error.message });
+        }
+        try {
+            const viewer = iframe.contentWindow?.OCA?.Viewer;
+            if (viewer && typeof viewer.close === 'function') {
+                viewer.close();
+                requested = true;
+            }
+        } catch (error) {
+            debugLog('iframe_viewer_close_failed', { appId: entry.app?.id || '', message: error.message });
+        }
+        return requested;
+    }
+
+    function closeWindow(id, reason = 'window_closed') {
+        const entry = windows.get(id);
+        if (!entry) return;
+        if (entry.window.dataset.desktopClosing === 'true') return;
+        entry.window.dataset.desktopClosing = 'true';
+        const graceful = prepareIframeForClose(entry);
+        window.setTimeout(() => removeWindowEntry(id, reason), graceful ? 500 : 0);
     }
 
     function openExternalWindow({ appId, title, subtitle = '', href, icon = '' }) {
@@ -828,15 +860,9 @@
     function watchIframeFileViewer(iframe, app) {
         if (!String(app.id).startsWith('file-') && !String(app.id).startsWith('file_')) return;
         let interval = null;
-        const closeWindow = () => {
-            const entry = windows.get(app.id);
-            if (!entry) return;
-            entry.window.remove();
-            entry.task.remove();
-            windows.delete(app.id);
+        const closeFileWindow = () => {
+            closeWindow(app.id, 'file_window_closed_by_viewer');
             if (interval) clearInterval(interval);
-            saveState();
-            debugLog('file_window_closed_by_viewer', { appId: app.id, appName: app.name });
         };
         try {
             const doc = iframe.contentDocument;
@@ -856,7 +882,7 @@
             ].join(',');
             doc.addEventListener('click', (event) => {
                 if (event.target.closest(closeSelectors)) {
-                    setTimeout(closeWindow, 100);
+                    setTimeout(closeFileWindow, 100);
                 }
             }, true);
             interval = setInterval(() => {
@@ -864,7 +890,7 @@
                     const url = iframe.contentWindow?.location?.href || '';
                     const hasViewer = Boolean(doc.querySelector('.viewer, #viewer, [class*="viewer"], [id*="viewer"], .modal-container'));
                     const hasClose = Boolean(doc.querySelector(closeSelectors));
-                    if (!url.includes('/index.php/f/') && !hasViewer && !hasClose) closeWindow();
+                    if (!url.includes('/index.php/f/') && !hasViewer && !hasClose) closeFileWindow();
                 } catch {
                     clearInterval(interval);
                 }
@@ -1276,13 +1302,8 @@
             if (typeof applyIconSettings === 'function') applyIconSettings(event.data.settings || {});
         } else if (event.data?.type === 'nextcloud-desktop:close-window') {
             const id = String(event.data.appId || '').replace(/[^a-z0-9_-]/gi, '_');
-            const entry = windows.get(id);
-            if (entry) {
-                entry.window.remove();
-                entry.task.remove();
-                windows.delete(id);
-                saveState();
-                debugLog('window_closed_by_child', { appId: id });
+            if (windows.has(id)) {
+                closeWindow(id, 'window_closed_by_child');
             }
         }
     });

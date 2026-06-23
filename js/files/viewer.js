@@ -14,9 +14,32 @@
         window.parent?.postMessage(message, window.location.origin);
     }
 
+    let nativeViewerClosing = false;
+
+    function closeNativeViewer() {
+        if (nativeViewerClosing) return;
+        nativeViewerClosing = true;
+        try {
+            if (window.OCA?.Viewer && typeof OCA.Viewer.close === 'function') {
+                OCA.Viewer.close();
+            }
+        } catch (error) {
+            // If the native viewer cleanup fails, still let the shell remove the window.
+            console.warn('Failed to close native viewer before desktop window removal', error);
+        }
+    }
+
     function closeWindow() {
+        closeNativeViewer();
         post({ type: 'nextcloud-desktop:close-window', appId });
     }
+
+    window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin) return;
+        if (event.data?.type === 'nextcloud-desktop:prepare-close') {
+            closeNativeViewer();
+        }
+    });
 
     function hideLauncher() {
         root.classList.add('is-native-open');
