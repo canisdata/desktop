@@ -10,7 +10,8 @@
     const startMenu = document.getElementById('desktop-start-menu');
     const launcher = document.getElementById('desktop-launcher');
     const taskList = document.getElementById('desktop-task-list');
-    const search = document.getElementById('desktop-search');
+    const search = document.getElementById('desktop-unified-search');
+    const pinnedApps = document.getElementById('desktop-pinned-apps');
     const clock = document.getElementById('desktop-clock');
     const headerEndSlot = document.getElementById('desktop-header-end-slot');
     const desktopLogo = document.getElementById('desktop-nextcloud-logo');
@@ -50,8 +51,7 @@
         if (!headerEnd) return;
         // The Contacts app is available on its own, so drop the header contacts menu.
         headerEnd.querySelectorAll('#contactsmenu, .contactsmenu, [id*="contactsmenu"]').forEach((el) => el.remove());
-        // Unified search is hidden for now.
-        headerEnd.querySelectorAll('#unified-search, [class*="unified-search"], [id*="unified-search"]').forEach((el) => el.remove());
+        // Keep unified search alive in the moved header-end; the Apps menu search trigger clicks it.
         // Reload-desktop button was removed for now.
         headerEnd.querySelectorAll('#desktop-reload-button').forEach((el) => el.remove());
     }
@@ -326,26 +326,247 @@
         }, ...withoutFiles];
     }
 
-    function createAppButton(app) {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'desktop-app-tile';
-        button.dataset.name = app.name.toLowerCase();
-        button.innerHTML = `<span class="desktop-app-icon">${app.icon ? `<img alt="" src="${escapeHtml(app.icon)}">` : escapeHtml(app.name.slice(0, 1))}</span><span>${escapeHtml(app.name)}</span>`;
+    const APP_PIN_KEY = 'desktop_workspace:app-pins:v1';
+    function appKey(app) { return String(app?.id || app?.href || app?.name || '').replace(/[^a-z0-9_-]/gi, '_'); }
+    function readAppPins() {
+        try { const parsed = JSON.parse(localStorage.getItem(APP_PIN_KEY) || '{}'); return { taskbar: [], desktop: [], ...parsed }; } catch (e) { return { taskbar: [], desktop: [] }; }
+    }
+    function writeAppPins(pins) { try { localStorage.setItem(APP_PIN_KEY, JSON.stringify(pins)); } catch (e) { /* ignore */ } }
+    function isAppPinned(app, where) { return readAppPins()[where]?.includes(appKey(app)); }
+    function setAppPinned(app, where, pinned) {
+        const pins = readAppPins();
+        const key = appKey(app);
+        pins[where] = (pins[where] || []).filter((id) => id !== key);
+        if (pinned) pins[where].push(key);
+        writeAppPins(pins);
+        renderPinnedApps();
+        if (where === 'desktop' && typeof favoritesReload === 'function') favoritesReload();
+    }
+    function launchApp(app) {
         const isFileApp = app.fileApp === true || app.id === 'files' || (app.href && app.href.includes('/apps/files'));
         const allowMulti = isFileApp || app.multiInstance === true;
-        button.addEventListener('click', () => { closeStartMenu(); openWindow(allowMulti ? { ...app, multiInstance: true } : app); });
+        closeStartMenu();
+        openWindow(allowMulti ? { ...app, multiInstance: true } : app);
+    }
+    function createAppSymbol(app, extraClass = '', location = 'menu') {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `desktop-app-symbol ${extraClass}`.trim();
+        button.dataset.appKey = appKey(app);
+        button.dataset.pinLocation = location;
+        button.title = app.name;
+        button.setAttribute('aria-label', app.name);
+        button.innerHTML = `<span class="desktop-app-menu-icon">${app.icon ? `<img alt="" draggable="false" src="${escapeHtml(app.icon)}">` : escapeHtml(app.name.slice(0, 1))}</span><span class="desktop-app-menu-label">${escapeHtml(app.name)}</span>`;
+        button.addEventListener('click', () => launchApp(app));
+        button.addEventListener('contextmenu', (event) => openAppContextMenu(app, event, location));
         return button;
     }
+    function createAppButton(app) {
+        return createAppSymbol(app, 'desktop-app-tile', 'menu');
+    }
 
+    function appFromKey(key) { return launcherApps.find((app) => appKey(app) === key); }
+    function ensureAppContextMenu() {
+        let menu = document.getElementById('desktop-app-context-menu');
+        if (menu) return menu;
+        menu = document.createElement('div');
+        menu.id = 'desktop-app-context-menu';
+        menu.className = 'desktop-task-context-menu desktop-app-context-menu';
+        menu.setAttribute('role', 'menu');
+        menu.hidden = true;
+        menu.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+            const app = appFromKey(menu.dataset.appKey);
+            if (!app) return closeAppContextMenu();
+            if (button.dataset.action === 'taskbar-add') setAppPinned(app, 'taskbar', true);
+            if (button.dataset.action === 'taskbar-remove') setAppPinned(app, 'taskbar', false);
+            if (button.dataset.action === 'desktop-add') setAppPinned(app, 'desktop', true);
+            if (button.dataset.action === 'desktop-remove') setAppPinned(app, 'desktop', false);
+            closeAppContextMenu();
+        });
+        document.body.appendChild(menu);
+        return menu;
+    }
+    function closeAppContextMenu() { const menu = document.getElementById('desktop-app-context-menu'); if (menu) menu.hidden = true; }
+    function openAppContextMenu(app, event, location = 'menu') {
+        event.preventDefault();
+        event.stopPropagation();
+        const menu = ensureAppContextMenu();
+        menu.dataset.appKey = appKey(app);
+        const taskbarPinned = isAppPinned(app, 'taskbar');
+        const desktopPinned = isAppPinned(app, 'desktop');
+        if (location === 'taskbar') {
+            menu.innerHTML = `<button type="button" role="menuitem" data-action="taskbar-remove">${escapeHtml(t('Remove from taskbar'))}</button>`;
+        } else if (location === 'desktop') {
+            menu.innerHTML = `<button type="button" role="menuitem" data-action="desktop-remove">${escapeHtml(t('Remove from desktop'))}</button>`;
+        } else {
+            menu.innerHTML = `
+                <button type="button" role="menuitem" data-action="${taskbarPinned ? 'taskbar-remove' : 'taskbar-add'}">${escapeHtml(taskbarPinned ? t('Remove from taskbar') : t('Add to taskbar'))}</button>
+                <button type="button" role="menuitem" data-action="${desktopPinned ? 'desktop-remove' : 'desktop-add'}">${escapeHtml(desktopPinned ? t('Remove from desktop') : t('Add to desktop'))}</button>`;
+        }
+        menu.hidden = false;
+        const width = menu.offsetWidth || 220;
+        const height = menu.offsetHeight || 90;
+        menu.style.left = `${Math.max(8, Math.min(event.clientX, window.innerWidth - width - 8))}px`;
+        menu.style.top = `${Math.max(8, Math.min(event.clientY, window.innerHeight - height - 8))}px`;
+        menu.querySelector('button')?.focus();
+    }
+    function renderPinnedApps() {
+        if (!pinnedApps) return;
+        const pins = readAppPins().taskbar || [];
+        const nodes = pins.map(appFromKey).filter(Boolean).map((app) => {
+            const node = createAppSymbol(app, 'desktop-pinned-app', 'taskbar');
+            node.draggable = true;
+            node.addEventListener('dragstart', (event) => {
+                event.dataTransfer.effectAllowed = 'move';
+                event.dataTransfer.setData('text/x-desktop-app-key', appKey(app));
+                node.classList.add('is-dragging');
+            });
+            node.addEventListener('dragend', () => node.classList.remove('is-dragging'));
+            return node;
+        });
+        pinnedApps.replaceChildren(...nodes);
+    }
+    function reorderPinnedApps(dragKey, beforeKey = '') {
+        const pins = readAppPins();
+        const list = (pins.taskbar || []).filter((key) => key !== dragKey);
+        const beforeIndex = beforeKey ? list.indexOf(beforeKey) : -1;
+        if (beforeIndex >= 0) list.splice(beforeIndex, 0, dragKey);
+        else list.push(dragKey);
+        pins.taskbar = list;
+        writeAppPins(pins);
+        renderPinnedApps();
+    }
+    function initPinnedAppReordering() {
+        if (!pinnedApps || pinnedApps.dataset.reorderBound === 'true') return;
+        pinnedApps.dataset.reorderBound = 'true';
+        pinnedApps.addEventListener('dragover', (event) => {
+            if (!Array.from(event.dataTransfer.types || []).includes('text/x-desktop-app-key')) return;
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'move';
+        });
+        pinnedApps.addEventListener('drop', (event) => {
+            const dragKey = event.dataTransfer.getData('text/x-desktop-app-key');
+            if (!dragKey) return;
+            event.preventDefault();
+            const target = event.target.closest('.desktop-pinned-app');
+            const beforeKey = target && target.dataset.appKey !== dragKey ? target.dataset.appKey : '';
+            reorderPinnedApps(dragKey, beforeKey);
+        });
+    }
+    function renderPinnedDesktopApps() { if (typeof favoritesReload === 'function') favoritesReload(); }
+    function openUnifiedSearchOverlay() {
+        closeStartMenu();
+        const selectors = [
+            '.unified-search-input__button', '.unified-search-menu button',
+            '#unified-search button', '[id*="unified-search"] button', '[class*="unified-search"] button',
+            'button[aria-label*="Search"]', 'button[title*="Search"]'
+        ];
+        const trigger = selectors.map((sel) => document.querySelector(sel)).find((el) => el && !search?.contains(el));
+        if (trigger) { trigger.click(); setTimeout(positionHeaderEndMenus, 0); debugLog('unified_search_triggered_from_apps_menu'); return; }
+        debugLog('unified_search_trigger_not_found');
+    }
     function renderLauncher() {
         const apps = getApps();
         launcher.replaceChildren(...apps.map(createAppButton));
         if (!apps.length) launcher.innerHTML = '<p class="desktop-empty">No apps found.</p>';
+        alignAppsMenuIcons();
         return apps;
     }
 
-    function openStartMenu() { startMenu.hidden = false; startButton.setAttribute('aria-expanded', 'true'); search.focus(); }
+    const APPS_MENU_SIZE_KEY = 'desktop_workspace:apps-menu-size:v1';
+    function readAppsMenuSize() {
+        try { return JSON.parse(localStorage.getItem(APPS_MENU_SIZE_KEY) || 'null') || {}; } catch (e) { return {}; }
+    }
+    function writeAppsMenuSize(size) {
+        try { localStorage.setItem(APPS_MENU_SIZE_KEY, JSON.stringify(size)); } catch (e) { /* ignore */ }
+    }
+    function appsMenuMetrics(width = startMenu?.clientWidth || 320) {
+        const appCount = Math.max(1, launcherApps.length || getApps().length || launcher?.children?.length || 1);
+        const minColumns = 4;
+        const minWidth = 16 + minColumns * 69;
+        const columns = Math.max(minColumns, Math.floor((Math.max(minWidth, width) - 16) / 69));
+        const rows = Math.max(1, Math.ceil(appCount / columns));
+        const headerHeight = startMenu?.querySelector('.desktop-start-header')?.offsetHeight || 58;
+        const minHeight = headerHeight + 16 + rows * 76;
+        return { appCount, minColumns, minWidth, columns, rows, minHeight };
+    }
+    function clampAppsMenuSize(width, height) {
+        const maxWidth = Math.max(292, window.innerWidth - 28);
+        const maxHeight = Math.max(260, window.innerHeight - 110);
+        const widthBase = Math.min(Math.max(Math.round(width || 320), appsMenuMetrics().minWidth), maxWidth);
+        const metrics = appsMenuMetrics(widthBase);
+        return {
+            width: widthBase,
+            height: Math.min(Math.max(Math.round(height || 520), metrics.minHeight), maxHeight),
+        };
+    }
+    function applyAppsMenuSize() {
+        if (!startMenu) return;
+        const size = clampAppsMenuSize(readAppsMenuSize().width, readAppsMenuSize().height);
+        startMenu.style.width = `${size.width}px`;
+        startMenu.style.height = `${size.height}px`;
+        alignAppsMenuIcons();
+    }
+    function alignAppsMenuIcons() {
+        if (!launcher || !startMenu) return;
+        const metrics = appsMenuMetrics(startMenu.clientWidth || 320);
+        launcher.style.gridTemplateColumns = `repeat(${metrics.columns}, 69px)`;
+    }
+    function ensureAppsMenuResizeHandles() {
+        if (!startMenu || startMenu.dataset.resizeHandles === 'true') return;
+        ['n', 'e', 'ne'].forEach((dir) => {
+            const handle = document.createElement('div');
+            handle.className = `desktop-start-resize desktop-start-resize-${dir}`;
+            handle.dataset.dir = dir;
+            startMenu.appendChild(handle);
+            handle.addEventListener('pointerdown', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handle.setPointerCapture(event.pointerId);
+                const start = { x: event.clientX, y: event.clientY, width: startMenu.offsetWidth, height: startMenu.offsetHeight };
+                const move = (moveEvent) => {
+                    const dx = moveEvent.clientX - start.x;
+                    const dy = moveEvent.clientY - start.y;
+                    const rawWidth = dir.includes('e') ? start.width + dx : start.width;
+                    const rawHeight = dir.includes('n') ? start.height - dy : start.height;
+                    const size = clampAppsMenuSize(rawWidth, rawHeight);
+                    startMenu.style.width = `${size.width}px`;
+                    startMenu.style.height = `${size.height}px`;
+                    alignAppsMenuIcons();
+                };
+                const up = (upEvent) => {
+                    handle.releasePointerCapture(upEvent.pointerId);
+                    handle.removeEventListener('pointermove', move);
+                    handle.removeEventListener('pointerup', up);
+                    const rect = startMenu.getBoundingClientRect();
+                    writeAppsMenuSize(clampAppsMenuSize(rect.width, rect.height));
+                };
+                handle.addEventListener('pointermove', move);
+                handle.addEventListener('pointerup', up, { once: true });
+            });
+        });
+        startMenu.dataset.resizeHandles = 'true';
+    }
+
+    function observeAppsMenuSize() {
+        if (!startMenu || !window.ResizeObserver) return;
+        let timer = null;
+        const observer = new ResizeObserver(() => {
+            alignAppsMenuIcons();
+            if (startMenu.hidden) return;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                const rect = startMenu.getBoundingClientRect();
+                writeAppsMenuSize(clampAppsMenuSize(rect.width, rect.height));
+            }, 250);
+        });
+        observer.observe(startMenu);
+        window.addEventListener('resize', () => { applyAppsMenuSize(); alignAppsMenuIcons(); });
+    }
+
+    function openStartMenu() { ensureAppsMenuResizeHandles(); applyAppsMenuSize(); startMenu.hidden = false; startButton.setAttribute('aria-expanded', 'true'); alignAppsMenuIcons(); search?.focus(); }
     function closeStartMenu() { startMenu.hidden = true; startButton.setAttribute('aria-expanded', 'false'); }
     function toggleStartMenu() { startMenu.hidden ? openStartMenu() : closeStartMenu(); }
 
@@ -477,6 +698,8 @@
         menu.innerHTML = `
             <button type="button" role="menuitem" data-action="minimize">${escapeHtml(t('Minimize'))}</button>
             <button type="button" role="menuitem" data-action="maximize">${escapeHtml(t('Maximize'))}</button>
+            <button type="button" role="menuitem" data-action="taskbar-pin"></button>
+            <button type="button" role="menuitem" data-action="desktop-pin"></button>
             <button type="button" role="menuitem" data-action="close">${escapeHtml(t('Close'))}</button>`;
         document.body.appendChild(menu);
         menu.addEventListener('click', (event) => {
@@ -493,6 +716,8 @@
                 focusWindow(id);
                 saveState();
             }
+            if (action === 'taskbar-pin') setAppPinned(entry.app, 'taskbar', !isAppPinned(entry.app, 'taskbar'));
+            if (action === 'desktop-pin') setAppPinned(entry.app, 'desktop', !isAppPinned(entry.app, 'desktop'));
             if (action === 'close') closeWindow(id);
             closeTaskContextMenu();
         });
@@ -522,6 +747,8 @@
         menu.style.top = `${Math.max(8, y)}px`;
         menu.querySelector('[data-action="minimize"]').textContent = entry.window.classList.contains('is-minimized') ? t('Restore') : t('Minimize');
         menu.querySelector('[data-action="maximize"]').textContent = entry.window.classList.contains('is-maximized') ? t('Restore size') : t('Maximize');
+        menu.querySelector('[data-action="taskbar-pin"]').textContent = isAppPinned(entry.app, 'taskbar') ? t('Remove from taskbar') : t('Add to taskbar');
+        menu.querySelector('[data-action="desktop-pin"]').textContent = isAppPinned(entry.app, 'desktop') ? t('Remove from desktop') : t('Add to desktop');
         menu.querySelector('button')?.focus();
     }
 
@@ -1310,10 +1537,12 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeStartMenu(); });
     document.addEventListener('pointerdown', (event) => {
         if (!startMenu.hidden && !startMenu.contains(event.target) && !startButton.contains(event.target)) closeStartMenu();
-        const menu = document.getElementById('desktop-task-context-menu');
-        if (menu && !menu.hidden && !menu.contains(event.target)) closeTaskContextMenu();
-    });
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeTaskContextMenu(); });
+        const taskMenu = document.getElementById('desktop-task-context-menu');
+        if (taskMenu && !taskMenu.hidden && !taskMenu.contains(event.target)) closeTaskContextMenu();
+        const appMenu = document.getElementById('desktop-app-context-menu');
+        if (appMenu && !appMenu.hidden && !appMenu.contains(event.target)) closeAppContextMenu();
+    }, true);
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeTaskContextMenu(); closeAppContextMenu(); } });
     headerEndSlot?.addEventListener('click', scheduleHeaderEndMenuPositioning, true);
     document.addEventListener('click', (event) => {
         if (event.target.closest('#desktop-header-end-slot')) {
@@ -1421,10 +1650,7 @@
     }, true);
     window.addEventListener('resize', positionHeaderEndMenus);
     setInterval(positionHeaderEndMenus, 400);
-    search.addEventListener('input', () => {
-        const q = search.value.trim().toLowerCase();
-        launcher.querySelectorAll('.desktop-app-tile').forEach((tile) => { tile.hidden = q && !tile.dataset.name.includes(q); });
-    });
+    search?.addEventListener('click', openUnifiedSearchOverlay);
 
     moveHeaderEndToTaskbar();
     observeHeaderEndMenus();
@@ -1433,8 +1659,12 @@
     setTimeout(copyHeaderLogoToTaskbar, 500);
     syncAppearance();
     observeAppearanceChanges();
+    applyAppsMenuSize();
+    observeAppsMenuSize();
     const apps = renderLauncher();
     launcherApps = apps;
+    renderPinnedApps();
+    initPinnedAppReordering();
     hideHeaderApps(apps);
     setTimeout(() => hideHeaderApps(launcherApps), 500);
     setTimeout(() => hideHeaderApps(launcherApps), 1500);
@@ -1623,11 +1853,14 @@
             el.dataset.mime = item.mime || '';
             el.dataset.folder = item.isFolder ? 'true' : 'false';
             el.dataset.kind = item.special ? 'special' : (item.kind || 'fav');
+            if (item.kind === 'app') el.dataset.appKey = item.appKey || item.id || '';
             el.dataset.favorited = item.favorited ? 'true' : 'false';
             if (item.special) el.dataset.special = item.special;
-            const visual = item.special
-                ? (item.svg || `<img src="${item.iconUrl}" alt="" draggable="false"${item.iconFallback ? ` data-fallback="${escapeHtml(item.iconFallback)}"` : ''}>`)
-                : favVisual(item);
+            const visual = item.kind === 'app'
+                ? `<span class="desktop-app-shortcut-circle"><img src="${escapeHtml(item.icon || '')}" alt="" draggable="false"></span>`
+                : (item.special
+                    ? (item.svg || `<img src="${item.iconUrl}" alt="" draggable="false"${item.iconFallback ? ` data-fallback="${escapeHtml(item.iconFallback)}"` : ''}>`)
+                    : favVisual(item));
             const favoriteBadge = item.favorited ? `<span class="desktop-fav-badge desktop-fav-badge-favorite">${STAR_SVG}</span>` : '';
             const sharedBadge = !item.special && isSharedItem(item) ? `<span class="desktop-fav-badge desktop-fav-badge-shared" title="${escapeHtml(shareBadgeTitle(item))}">${SHARED_SVG}</span>` : '';
             el.innerHTML = `<span class="desktop-fav-icon">${visual}${favoriteBadge}${sharedBadge}</span><span class="desktop-fav-label">${escapeHtml(item.name)}</span>`;
@@ -1741,6 +1974,11 @@
         }
 
         function openFavorite(el) {
+            if (el.dataset.kind === 'app') {
+                const app = appFromKey(el.dataset.appKey);
+                if (app) launchApp(app);
+                return;
+            }
             if (el.dataset.special === 'trash') {
                 // Deleted files always open in the Nextcloud file manager (trashbin view).
                 const url = OC.generateUrl('/apps/files/trashbin');
@@ -1960,6 +2198,19 @@
         function openFavMenu(el, x, y) {
             const selected = Array.from(selection);
             const entries = [['open', t('Open')]];
+            if (el.dataset.kind === 'app') {
+                entries.push(['desktop-remove', t('Remove from desktop')]);
+                buildMenu(entries, x, y).addEventListener('click', (ev) => {
+                    const b = ev.target.closest('button'); if (!b) return;
+                    const act = b.dataset.act; closeFavMenu();
+                    if (act === 'open') openFavorite(el);
+                    else if (act === 'desktop-remove') {
+                        const app = appFromKey(el.dataset.appKey);
+                        if (app) setAppPinned(app, 'desktop', false);
+                    }
+                });
+                return;
+            }
             if (el.dataset.kind === 'file') {
                 const files = selected.filter((i) => i.dataset.kind === 'file' && i.dataset.path);
                 if (el.dataset.folder !== 'true') entries.push(['download', t('Download')]);
@@ -2313,13 +2564,22 @@
             const overflow = [];
             icons.forEach((el) => {
                 const saved = positions[el.dataset.fileId];
-                if (saved && saved.col >= 0 && saved.row >= 0 && saved.col < cols && saved.row < rows && isFree(saved.col, saved.row)) {
-                    placeIcon(el, saved.col, saved.row);
-                } else {
-                    overflow.push(el);
+                if (saved && saved.col >= 0 && saved.row >= 0) {
+                    const targetCol = Math.min(saved.col, cols - 1);
+                    const targetRow = Math.min(saved.row, rows - 1);
+                    const target = nearestFreeCell(targetCol, targetRow, el.dataset.fileId);
+                    if (isFree(target.col, target.row, el.dataset.fileId)) {
+                        placeIcon(el, target.col, target.row);
+                        return;
+                    }
                 }
+                overflow.push(el);
             });
-            overflow.forEach((el) => { const f = nextFreeCell(); placeIcon(el, f.col, f.row); });
+            overflow.forEach((el) => {
+                const saved = positions[el.dataset.fileId];
+                const target = saved ? nearestFreeCell(saved.col, saved.row, el.dataset.fileId) : nextFreeCell();
+                placeIcon(el, target.col, target.row);
+            });
         }
         let layoutTimer = null;
         const relayout = () => { clearTimeout(layoutTimer); layoutTimer = setTimeout(layout, 120); };
@@ -2332,7 +2592,18 @@
             clearSelection();
             icons = [];
             const add = (item) => { const el = makeIcon(item); layer.appendChild(el); wireIcon(el); icons.push(el); };
+            const addDesktopPinnedApps = () => {
+                (readAppPins().desktop || []).map(appFromKey).filter(Boolean).forEach((app) => add({
+                    id: `app-${appKey(app)}`,
+                    appKey: appKey(app),
+                    kind: 'app',
+                    name: app.name,
+                    icon: app.icon,
+                    isFolder: false,
+                }));
+            };
             if (root.dataset.showHome === 'true') add(homeItem()); // Home takes the first cell
+            addDesktopPinnedApps();
             if (desktopFolder) {
                 // Show the chosen desktop folder's contents AND favorites together.
                 // Favorites that already appear as folder contents are not added twice.

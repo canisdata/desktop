@@ -14,9 +14,9 @@ desktop icons, and an optional built-in file manager.
 
 - **App windows** — open Nextcloud apps (Files, Mail, Calendar, …) as draggable, resizable,
   minimizable, maximizable windows. Snap to screen edges for tiling.
-- **Taskbar & clock** — running windows appear in a taskbar; a clock/date sits in the panel.
-- **Desktop icons** — show your **Favorites** and/or the contents of a chosen **desktop folder**
-  as icons, with drag-to-arrange positions, a recycling bin, and a home shortcut.
+- **Taskbar & clock** — running windows appear in a taskbar; a clock/date sits in the panel. Apps can be pinned to the taskbar and reordered there with drag-and-drop.
+- **Desktop icons** — show your **Favorites**, pinned apps, and/or the contents of a chosen **desktop folder**
+  as icons, with drag-to-arrange positions, a recycling bin, and a home shortcut. Icons stay within the visible grid when the desktop is resized.
 - **Drag-and-drop upload** — drop files from your computer onto the desktop to upload them into the
   desktop folder, with a progress bar.
 - **Built-in file manager (experimental)** — *Desktop Files*, a lightweight in-shell file manager
@@ -24,6 +24,7 @@ desktop icons, and an optional built-in file manager.
   native Nextcloud viewer.
 - **Window & icon state is saved to your account** — open windows reopen where you left them (at
   their last location), and icon positions follow you across devices.
+- **NC34-style Apps menu** — the Apps menu uses the same app symbols as Nextcloud 34, opens the native unified search overlay, can be resized upward/right, and remembers its size.
 - **Header & account menu integration** — the Nextcloud header links open as Desktop Workspace
   windows; "Set status" and global search open as native overlays.
 - **Per-user and per-admin settings** — including a first-visit onboarding, full per-user reset,

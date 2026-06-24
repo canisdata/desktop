@@ -118,16 +118,24 @@ body:has(#desktop-root) .content {
 .desktop-start-header strong { display: block; font-size: 22px; }
 .desktop-start-header span { color: var(--desktop-panel-muted); }
 
-.desktop-search {
+.desktop-unified-search {
     width: 100%;
     border: 1px solid var(--desktop-panel-border);
     border-radius: 999px;
     background: var(--color-main-background, #fff);
     color: var(--color-main-text, #111827);
     padding: 10px 14px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    cursor: pointer;
 }
 
-.desktop-search::placeholder { color: var(--color-text-maxcontrast, #6b7280); }
+.desktop-unified-search:hover { background: var(--desktop-control-hover); }
+
+
 
 .desktop-launcher {
     display: grid;
@@ -707,3 +715,93 @@ body:has(#desktop-root) .header-menu__wrapper {
 .desktop-upload-bar { height: 6px; border-radius: var(--border-radius-pill, 100px); background: var(--color-background-dark, #e0e0e0); overflow: hidden; }
 .desktop-upload-fill { height: 100%; width: 0; background: var(--color-primary-element, #0a7cff); transition: width 0.15s ease; }
 .desktop-band { position: absolute; z-index: 4; border: 1px solid var(--color-primary-element, #0a7cff); background: var(--color-primary-element, #0a7cff); opacity: 0.18; pointer-events: none; border-radius: var(--border-radius-small, 4px); }
+
+
+/* 0.13.0 NC34-style app symbols, pins and taskbar sections */
+.desktop-taskbar-divider { width: 1px; height: 34px; flex: 0 0 1px; background: color-mix(in srgb, var(--desktop-panel-border) 78%, transparent); }
+.desktop-pinned-apps { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; max-width: 32vw; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+.desktop-app-symbol { color: var(--desktop-panel-text); }
+.desktop-app-menu-icon img { width: 32px; height: 32px; object-fit: contain; -webkit-user-drag: none; user-select: none; pointer-events: none; }
+.desktop-launcher { display: flex; flex-direction: column; gap: 2px; padding: 8px; }
+.desktop-app-tile { min-height: 44px; width: 100%; border: 0; border-radius: var(--border-radius-element, 8px); background: transparent; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding: 6px 10px; text-align: left; font-weight: 500; transform: none; }
+.desktop-app-tile:hover, .desktop-app-tile:focus-visible { background: var(--color-background-hover, rgba(127, 127, 127, 0.15)); transform: none; }
+.desktop-app-tile .desktop-app-menu-icon { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; }
+.desktop-app-tile .desktop-app-menu-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.desktop-pinned-app { width: 38px; height: 38px; min-width: 38px; border: 1px solid var(--desktop-panel-border); border-radius: 12px; background: var(--desktop-control-background); padding: 0; display: grid; place-items: center; cursor: pointer; }
+.desktop-pinned-app:hover, .desktop-pinned-app:focus-visible { background: var(--desktop-control-hover); }
+.desktop-pinned-app .desktop-app-menu-label { display: none; }
+.desktop-pinned-app .desktop-app-menu-icon img { width: 24px; height: 24px; }
+.desktop-app-shortcuts { position: absolute; left: 16px; top: 16px; z-index: 2; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+.desktop-app-shortcut { width: 112px; min-height: 92px; border: 0; border-radius: var(--border-radius-element, 8px); background: transparent; color: var(--color-main-text, #f5f5f5); text-shadow: 0 1px 2px rgba(0,0,0,.45); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 4px; pointer-events: auto; cursor: default; }
+.desktop-app-shortcut:hover, .desktop-app-shortcut:focus-visible { background: var(--color-background-hover, rgba(127, 127, 127, 0.18)); outline: none; }
+.desktop-app-shortcut .desktop-app-menu-icon img { width: 48px; height: 48px; }
+.desktop-app-shortcut .desktop-app-menu-label { max-width: 104px; text-align: center; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+#desktop-root.desktop-theme-light .desktop-app-shortcut { text-shadow: 0 1px 3px rgba(255,255,255,.9), 0 0 2px rgba(255,255,255,.7); }
+.desktop-app-context-menu { min-width: 220px; }
+
+
+/* Refine 0.13.0 app launcher to match NC34 app-menu v-popper grid */
+.desktop-start-menu { width: min(320px, calc(100vw - 28px)); }
+.desktop-start-header { grid-template-columns: 1fr minmax(120px, 1fr) auto; gap: 10px; padding: 10px; }
+.desktop-launcher { display: grid; grid-template-columns: repeat(4, 69px); justify-content: start; gap: 0; padding: 8px; }
+.desktop-app-tile { width: 69px; min-height: 60px; height: auto; border: 0; border-radius: var(--border-radius-element, 8px); background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; padding: 8px 0 4px; text-align: center; font-weight: 400; color: var(--color-main-text, var(--desktop-panel-text)); }
+.desktop-app-tile:hover, .desktop-app-tile:focus-visible { background: var(--color-background-hover, rgba(127, 127, 127, 0.15)); transform: none; }
+.desktop-app-tile .desktop-app-menu-icon { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; background: var(--color-primary-element, var(--color-primary, #00679e)); display: flex; align-items: center; justify-content: center; }
+.desktop-app-tile .desktop-app-menu-icon img { width: 24px; height: 24px; filter: var(--background-invert-if-dark, none); }
+.desktop-app-tile .desktop-app-menu-label { width: 64px; max-width: 64px; font-size: 12px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-main-text, inherit); }
+.desktop-pinned-app .desktop-app-menu-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--color-primary-element, var(--color-primary, #00679e)); display: flex; align-items: center; justify-content: center; }
+.desktop-pinned-app .desktop-app-menu-icon img { width: 18px; height: 18px; filter: var(--background-invert-if-dark, none); }
+.desktop-fav[data-kind="app"] .desktop-fav-icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; }
+.desktop-app-shortcut-circle { width: 48px; height: 48px; border-radius: 50%; background: var(--color-primary-element, var(--color-primary, #00679e)); display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px var(--color-box-shadow, rgba(0, 0, 0, 0.25)); }
+.desktop-app-shortcut-circle img { width: 30px !important; height: 30px !important; filter: var(--background-invert-if-dark, none); }
+
+.desktop-start-menu .desktop-app-tile { box-sizing: border-box; width: 69px !important; min-height: 60px !important; padding: 8px 0 4px !important; }
+
+
+/* Apps menu sizing and taskbar unified-search hiding */
+.desktop-start-menu {
+    min-width: 292px;
+    min-height: 260px;
+    max-width: calc(100vw - 28px);
+    max-height: calc(100vh - 110px);
+    resize: both;
+}
+.desktop-start-header > div > span { display: none; }
+.desktop-start-header { grid-template-columns: minmax(70px, auto) minmax(120px, 1fr) auto; }
+.desktop-launcher { grid-template-columns: repeat(auto-fill, 69px); align-content: start; overflow: auto; }
+.desktop-header-end-slot .unified-search-menu,
+.desktop-header-end-slot .unified-search-input,
+.desktop-header-end-slot [class*="unified-search"] {
+    display: none !important;
+}
+
+
+/* Window-like Apps menu resize handles: only upward and rightward */
+.desktop-start-menu { resize: none !important; }
+.desktop-start-resize { position: absolute; z-index: 3; background: transparent; }
+.desktop-start-resize-n { top: -4px; left: 12px; right: 12px; height: 9px; cursor: ns-resize; }
+.desktop-start-resize-e { right: -4px; top: 12px; bottom: 12px; width: 9px; cursor: ew-resize; }
+.desktop-start-resize-ne { right: -5px; top: -5px; width: 18px; height: 18px; cursor: nesw-resize; }
+.desktop-pinned-app.is-dragging { opacity: .45; }
+.desktop-pinned-apps { min-height: 38px; }
+
+
+/* 0.13.0 taskbar logo and themed folder/special icon polish */
+.desktop-nextcloud-logo {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary, #39a5dc) 82%, var(--color-main-background, #fff)), color-mix(in srgb, var(--color-primary, #39a5dc) 58%, var(--color-main-background, #fff))) !important;
+    border-color: color-mix(in srgb, var(--color-primary, #39a5dc) 80%, var(--desktop-panel-border)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 4px 14px rgba(0,0,0,.16) !important;
+}
+.desktop-nextcloud-logo .logo,
+.desktop-nextcloud-logo .logo-icon { filter: none !important; }
+.desktop-fav[data-special] .desktop-fav-icon {
+    background: color-mix(in srgb, var(--color-primary-element-light, var(--color-primary-light, #e5f2fa)) 82%, var(--color-main-background, #fff)) !important;
+    color: var(--color-primary-element, var(--color-primary, #00679e));
+}
+.desktop-fav[data-folder="true"]:not([data-special]) .desktop-fav-icon {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.desktop-fav[data-special="trash"] .desktop-fav-icon {
+    background: color-mix(in srgb, var(--color-error, #e9322d) 14%, var(--color-main-background, #fff)) !important;
+}

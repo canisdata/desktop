@@ -3,6 +3,21 @@
 All notable changes to the Desktop app are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## 0.13.0 – 2026-06-24
+
+### Added
+- **NC34-style Apps menu.** The desktop Apps menu now uses the same grid-style app symbols as the native Nextcloud 34 header app menu, with app pin actions for the taskbar and desktop.
+- **Unified search from the Apps menu.** The old app-filter search is replaced by a trigger for Nextcloud's native unified search overlay.
+- **Pinned app areas.** Apps can be pinned to the taskbar or desktop; taskbar pinned apps can be reordered with drag-and-drop, and desktop-pinned apps use the same grid, selection and drag behavior as other desktop icons.
+- **Resizable Apps menu.** The Apps menu can be resized upward and to the right, remembers its size, auto-aligns app icons, and enforces a minimum size that keeps every app visible.
+
+### Changed
+- **Desktop/taskbar polish.** The right-side Nextcloud taskbar logo now uses the same primary-color treatment as the Apps button, and desktop folder/special icon backgrounds derive from Nextcloud theme CSS colors.
+
+### Fixed
+- **Context menus close on click-away.** Apps and taskbar right-click menus now dismiss when clicking elsewhere on the desktop.
+- **Resized desktop icon reflow is less surprising.** Icons that would move outside the right or bottom edge now clamp left/up from their saved grid cell instead of jumping back to the first free cells.
+
 ## 0.12.7 – 2026-06-23
 
 ### Changed

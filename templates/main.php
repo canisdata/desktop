@@ -28,9 +28,10 @@ try {
         <div class="desktop-start-header">
             <div>
                 <strong><?= p($l->t('Apps')) ?></strong>
-                <span><?= p($l->t('Desktop in Nextcloud')) ?></span>
             </div>
-            <input id="desktop-search" class="desktop-search" type="search" placeholder="<?= p($l->t('Search apps')) ?>" aria-label="<?= p($l->t('Search apps')) ?>" />
+            <button id="desktop-unified-search" class="desktop-unified-search" type="button" aria-label="<?= p($l->t('Search')) ?>">
+                <span aria-hidden="true">⌕</span><span><?= p($l->t('Search')) ?></span>
+            </button>
             <button id="desktop-settings-button" class="desktop-settings-button" type="button" title="<?= p($l->t('Desktop Settings')) ?>" aria-label="<?= p($l->t('Desktop Settings')) ?>" data-settings-url="<?= p($_['settingsUrl']) ?>">&#x2699;&#xFE0E;</button>
         </div>
         <div id="desktop-launcher" class="desktop-launcher" role="list"></div>
@@ -39,6 +40,9 @@ try {
     <footer class="desktop-taskbar" aria-label="<?= p($l->t('Taskbar')) ?>">
         <button id="desktop-fullscreen" class="taskbar-button taskbar-fullscreen" type="button" title="<?= p($l->t('Toggle fullscreen')) ?>" aria-label="<?= p($l->t('Toggle fullscreen')) ?>">&#x26F6;&#xFE0E;</button>
         <button id="desktop-start" class="taskbar-button taskbar-start" type="button" aria-controls="desktop-start-menu" aria-expanded="false"><?= p($l->t('Apps')) ?></button>
+        <span class="desktop-taskbar-divider" aria-hidden="true"></span>
+        <div id="desktop-pinned-apps" class="desktop-pinned-apps" aria-label="<?= p($l->t('Pinned apps')) ?>"></div>
+        <span class="desktop-taskbar-divider" aria-hidden="true"></span>
         <div id="desktop-task-list" class="desktop-task-list" aria-label="<?= p($l->t('Open windows')) ?>"></div>
         <div id="desktop-header-end-slot" class="desktop-header-end-slot" aria-label="<?= p($l->t('Nextcloud controls')) ?>"></div>
         <time id="desktop-clock" class="desktop-clock"></time>
