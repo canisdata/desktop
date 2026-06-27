@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Aplicații",
     "Unified search": "Căutare unificată",
     "Search contacts": "Cautare contacte",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Salvare eșuată: {msg}",
     "Desktop Settings": "Setări desktop",
     "Save": "Salvați",
-    "Proof of Concept – may contain errors": "Dovada conceptului – poate conține erori",
     "Nextcloud Version %s": "Nextcloud Versiunea %s",
     "Toggle fullscreen": "Comutați ecranul complet",
     "Open Nextcloud in a new tab": "Deschideți Nextcloud într-o filă nouă",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Toate traducerile sunt traduceri automate."
 },
     "nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));"
 );

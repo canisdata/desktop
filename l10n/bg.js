@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Приложения",
     "Unified search": "Глобално търсене",
     "Search contacts": "Търсене в контакти",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Неуспешно запазване: {msg}",
     "Desktop Settings": "Настройки на работния плот",
     "Save": "Запазване",
-    "Proof of Concept – may contain errors": "Доказателство за концепцията – може да съдържа грешки",
     "Nextcloud Version %s": "Nextcloud Версия %s",
     "Toggle fullscreen": "Превключване на цял екран",
     "Open Nextcloud in a new tab": "Отворете Nextcloud в нов раздел",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Всички преводи са машинни преводи."
 },
     "nplurals=2; plural=(n != 1);"
 );

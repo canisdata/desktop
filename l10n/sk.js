@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Aplikácie",
     "Apps": "Aplikácie",
     "Unified search": "Jednotné vyhľadávanie",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Uloženie zlyhalo: {msg}",
     "Desktop Settings": "Nastavenia pracovnej plochy",
     "Save": "Uložiť",
-    "Proof of Concept – may contain errors": "Proof of Concept – môže obsahovať chyby",
     "Nextcloud Version %s": "Nextcloud Verzia %s",
     "Toggle fullscreen": "Prepnúť na celú obrazovku",
     "Open Nextcloud in a new tab": "Otvorte Nextcloud na novej karte",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Všetky preklady sú strojové preklady."
 },
     "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);"
 );

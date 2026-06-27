@@ -107,7 +107,6 @@
         "Save failed: {msg}": "Хадгалж чадсангүй: {msg}",
         "Desktop Settings": "Ширээний тохиргоо",
         "Save": "Хадгалах",
-        "Proof of Concept – may contain errors": "Үзэл баримтлалын баталгаа – алдаа агуулсан байж болно",
         "Nextcloud Version %s": "Nextcloud Хувилбар %s",
         "Toggle fullscreen": "Бүтэн дэлгэцийг асаах/унтраах",
         "Open Nextcloud in a new tab": "Nextcloud-г шинэ таб дээр нээнэ үү",
@@ -215,7 +214,8 @@
         "Add to desktop": "Add to desktop",
         "Remove from desktop": "Remove from desktop",
         "Pinned apps": "Pinned apps",
-        "Search": "Search"
+        "Search": "Search",
+        "All translations are machine translations.": "Бүх орчуулга нь машин орчуулга юм."
     },
     "pluralForm": "nplurals=2; plural=(n != 1);"
 }

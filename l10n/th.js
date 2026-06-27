@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "แอป",
     "Search contacts": "ค้นหารายชื่อ",
     "Settings menu": "เมนูการตั้งค่า",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "บันทึกล้มเหลว: {msg}",
     "Desktop Settings": "การตั้งค่าเดสก์ท็อป",
     "Save": "บันทึก",
-    "Proof of Concept – may contain errors": "Proof of Concept – อาจมีข้อผิดพลาด",
     "Nextcloud Version %s": "Nextcloud เวอร์ชัน %s",
     "Toggle fullscreen": "สลับโหมดเต็มหน้าจอ",
     "Open Nextcloud in a new tab": "เปิด Nextcloud ในแท็บใหม่",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "คำแปลทั้งหมดเป็นคำแปลด้วยเครื่อง"
 },
     "nplurals=1; plural=0;"
 );

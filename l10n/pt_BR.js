@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Aplicativos",
     "Apps": "Aplicativos",
     "Unified search": "Pesquisa unificada",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Falha ao salvar: {msg}",
     "Desktop Settings": "Configurações da área de trabalho",
     "Save": "Salvar",
-    "Proof of Concept – may contain errors": "Prova de conceito – pode conter erros",
     "Nextcloud Version %s": "Nextcloud Versão %s",
     "Toggle fullscreen": "Alternar tela cheia",
     "Open Nextcloud in a new tab": "Abra Nextcloud em uma nova guia",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Adicionar à área de trabalho",
     "Remove from desktop": "Remover da área de trabalho",
     "Pinned apps": "Apps fixados",
-    "Search": "Pesquisar"
+    "Search": "Pesquisar",
+    "All translations are machine translations.": "Todas as traduções são traduções automáticas."
 },
     "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 );

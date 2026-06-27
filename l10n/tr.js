@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Uygulamalar",
     "Apps": "Uygulamalar",
     "Unified search": "Birleşik arama",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Kaydetme başarısız oldu: {msg}",
     "Desktop Settings": "Masaüstü Ayarları",
     "Save": "Kaydet",
-    "Proof of Concept – may contain errors": "Kavram Kanıtı – hatalar içerebilir",
     "Nextcloud Version %s": "Nextcloud Sürüm %s",
     "Toggle fullscreen": "Tam ekrana geçiş yap",
     "Open Nextcloud in a new tab": "Nextcloud'yi yeni bir sekmede açın",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Tüm çeviriler makine çevirisidir."
 },
     "nplurals=2; plural=(n > 1);"
 );

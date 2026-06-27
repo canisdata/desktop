@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Εφαρμογές",
     "Apps": "Εφαρμογές",
     "Unified search": "Ενιαία αναζήτηση",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Η αποθήκευση απέτυχε: {msg}",
     "Desktop Settings": "Ρυθμίσεις επιφάνειας εργασίας",
     "Save": "Αποθήκευση",
-    "Proof of Concept – may contain errors": "Proof of Concept – ενδέχεται να περιέχει σφάλματα",
     "Nextcloud Version %s": "Nextcloud Έκδοση %s",
     "Toggle fullscreen": "Εναλλαγή πλήρους οθόνης",
     "Open Nextcloud in a new tab": "Ανοίξτε το Nextcloud σε νέα καρτέλα",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Όλες οι μεταφράσεις είναι μηχανικές μεταφράσεις."
 },
     "nplurals=2; plural=(n != 1);"
 );

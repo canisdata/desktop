@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Applikasjoner",
     "Apps": "Apper",
     "Unified search": "Enhetlig søk",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Lagring mislyktes: {msg}",
     "Desktop Settings": "Skrivebordsinnstillinger",
     "Save": "Lagre",
-    "Proof of Concept – may contain errors": "Proof of Concept – kan inneholde feil",
     "Nextcloud Version %s": "Nextcloud Versjon %s",
     "Toggle fullscreen": "Slå på fullskjerm",
     "Open Nextcloud in a new tab": "Åpne Nextcloud i en ny fane",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Alle oversettelser er maskinoversettelser."
 },
     "nplurals=2; plural=(n != 1);"
 );

@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Forrit",
     "Unified search": "Sameinuð leit",
     "Search contacts": "Leita í tengiliðum",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Vistun mistókst: {msg}",
     "Desktop Settings": "Stillingar á skjáborði",
     "Save": "Vista",
-    "Proof of Concept – may contain errors": "Proof of Concept – gæti innihaldið villur",
     "Nextcloud Version %s": "Nextcloud Útgáfa %s",
     "Toggle fullscreen": "Skiptu um allan skjá",
     "Open Nextcloud in a new tab": "Opnaðu Nextcloud í nýjum flipa",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Allar þýðingar eru vélþýðingar."
 },
     "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
 );

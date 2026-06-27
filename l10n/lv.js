@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Lietotnes",
     "Apps": "Lietotnes",
     "Unified search": "Apvienotā meklēšana",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Saglabāt neizdevās: {msg}",
     "Desktop Settings": "Darbvirsmas iestatījumi",
     "Save": "Saglabāt",
-    "Proof of Concept – may contain errors": "Koncepcijas pierādījums – var būt kļūdas",
     "Nextcloud Version %s": "Nextcloud Versija %s",
     "Toggle fullscreen": "Pārslēgt pilnekrāna režīmu",
     "Open Nextcloud in a new tab": "Atveriet Nextcloud jaunā cilnē",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Visi tulkojumi ir mašīntulkojumi."
 },
     "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);"
 );

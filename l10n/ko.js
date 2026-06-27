@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "앱",
     "Unified search": "통합검색",
     "Search contacts": "연락처 검색",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "저장 실패: {msg}",
     "Desktop Settings": "데스크탑 설정",
     "Save": "저장",
-    "Proof of Concept – may contain errors": "개념 증명 – 오류가 있을 수 있음",
     "Nextcloud Version %s": "Nextcloud 버전 %s",
     "Toggle fullscreen": "전체 화면 전환",
     "Open Nextcloud in a new tab": "새 탭에서 Nextcloud 열기",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "모든 번역은 기계 번역입니다."
 },
     "nplurals=1; plural=0;"
 );

@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Alkalmazások",
     "Apps": "Alkalmazások",
     "Unified search": "Egyesített keresés",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "A mentés sikertelen: {msg}",
     "Desktop Settings": "Asztali beállítások",
     "Save": "Mentés",
-    "Proof of Concept – may contain errors": "Proof of Concept – hibákat tartalmazhat",
     "Nextcloud Version %s": "Nextcloud %s verzió",
     "Toggle fullscreen": "Teljes képernyő átváltása",
     "Open Nextcloud in a new tab": "Nyissa meg a Nextcloud-t egy új lapon",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Minden fordítás gépi fordítás."
 },
     "nplurals=2; plural=(n != 1);"
 );

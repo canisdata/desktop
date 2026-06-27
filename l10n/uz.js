@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Ilovalar",
     "Apps": "Ilovalar",
     "Unified search": "Yagona qidiruv",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Saqlash muvaffaqiyatsiz tugadi: {msg}",
     "Desktop Settings": "Ish stoli sozlamalari",
     "Save": "Saqlash",
-    "Proof of Concept – may contain errors": "Kontseptsiya isboti - xatolar bo'lishi mumkin",
     "Nextcloud Version %s": "Nextcloud Versiya %s",
     "Toggle fullscreen": "Toʻliq ekranga oʻtish",
     "Open Nextcloud in a new tab": "Nextcloud yangi varaqda oching",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Barcha tarjimalar mashina tarjimalaridir."
 },
     "nplurals=1; plural=0;"
 );

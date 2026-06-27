@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "アプリケーション",
     "Apps": "アプリ",
     "Unified search": "統合検索",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "保存に失敗しました: {msg}",
     "Desktop Settings": "デスクトップ設定",
     "Save": "保存",
-    "Proof of Concept – may contain errors": "概念実証 – エラーが含まれる可能性があります",
     "Nextcloud Version %s": "Nextcloud バージョン %s",
     "Toggle fullscreen": "全画面表示の切り替え",
     "Open Nextcloud in a new tab": "新しいタブで Nextcloud を開く",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "すべての翻訳は機械翻訳です。"
 },
     "nplurals=1; plural=0;"
 );

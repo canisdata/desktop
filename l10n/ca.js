@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Aplicacions",
     "Unified search": "Cerca unificada",
     "Search contacts": "Cerca de contactes",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "No s'ha pogut desar: {msg}",
     "Desktop Settings": "Configuració de l'escriptori",
     "Save": "Desa",
-    "Proof of Concept – may contain errors": "Prova de concepte: pot contenir errors",
     "Nextcloud Version %s": "Nextcloud Versió %s",
     "Toggle fullscreen": "Commuta la pantalla completa",
     "Open Nextcloud in a new tab": "Obriu Nextcloud en una pestanya nova",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Totes les traduccions són traduccions automàtiques."
 },
     "nplurals=2; plural=(n != 1);"
 );

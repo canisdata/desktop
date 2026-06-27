@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Sovellukset",
     "Apps": "Sovellukset",
     "Unified search": "Yhdistetty haku",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Tallennus epäonnistui: {msg}",
     "Desktop Settings": "Työpöytäasetukset",
     "Save": "Tallenna",
-    "Proof of Concept – may contain errors": "Proof of Concept – saattaa sisältää virheitä",
     "Nextcloud Version %s": "Nextcloud Versio %s",
     "Toggle fullscreen": "Koko näyttö päälle/pois",
     "Open Nextcloud in a new tab": "Avaa Nextcloud uudessa välilehdessä",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Kaikki käännökset ovat konekäännöksiä."
 },
     "nplurals=2; plural=(n != 1);"
 );

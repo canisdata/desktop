@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Aplicacions",
     "Search contacts": "Cercar pels contactes",
     "Settings menu": "Menú paramètres",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "L'enregistrament a fracassat: {msg}",
     "Desktop Settings": "Paramètres de burèu",
     "Save": "Enregistrar",
-    "Proof of Concept – may contain errors": "Pròva de concèpte – pòt conténer d'errors",
     "Nextcloud Version %s": "Nextcloud Version %s",
     "Toggle fullscreen": "Bascular l'ecran complet",
     "Open Nextcloud in a new tab": "Dobrir Nextcloud dins un onglet novèl",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Totas las traduccions son de traduccions automaticas."
 },
     "nplurals=2; plural=(n > 1);"
 );

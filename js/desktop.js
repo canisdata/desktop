@@ -1105,26 +1105,78 @@
         debugLog('iframe_fallback_opened', { appId: app.id, appName: app.name, href: absoluteHref });
     }
 
+    function normalizeFileTitle(name = '') {
+        const value = String(name || '').trim();
+        const direct = value.match(/^(.+?\.[A-Za-z0-9]{1,8})(?:\s[-–]\s.+)?$/);
+        return direct ? direct[1].trim() : value;
+    }
+
+    function fileExtension(name = '') {
+        const clean = normalizeFileTitle(name).split('?')[0].split('#')[0];
+        const match = clean.match(/\.([A-Za-z0-9]{1,8})$/);
+        return match ? match[1].toLowerCase() : '';
+    }
+
     function inferMimeFromName(name = '') {
-        const ext = String(name).split('.').pop().toLowerCase();
+        const ext = fileExtension(name);
         if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'tif', 'tiff', 'heic', 'avif'].includes(ext)) return `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+        if (['mp4', 'm4v', 'webm', 'mov', 'mkv', 'avi'].includes(ext)) return 'video/mp4';
+        if (['mp3', 'm4a', 'ogg', 'oga', 'flac', 'wav'].includes(ext)) return 'audio/mpeg';
         if (ext === 'pdf') return 'application/pdf';
-        if (['txt', 'md', 'markdown', 'log', 'csv'].includes(ext)) return 'text/plain';
-        if (['odt', 'ott'].includes(ext)) return 'application/vnd.oasis.opendocument.text';
-        if (['ods', 'ots'].includes(ext)) return 'application/vnd.oasis.opendocument.spreadsheet';
-        if (['odp', 'otp'].includes(ext)) return 'application/vnd.oasis.opendocument.presentation';
-        if (['doc', 'docx'].includes(ext)) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-        if (['xls', 'xlsx'].includes(ext)) return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-        if (['ppt', 'pptx'].includes(ext)) return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+        if (['txt', 'md', 'markdown', 'log'].includes(ext)) return 'text/plain';
+        if (['csv'].includes(ext)) return 'text/csv';
+        if (['ics'].includes(ext)) return 'text/calendar';
+        if (['vcf', 'vcard'].includes(ext)) return 'text/vcard';
+        if (['html', 'htm', 'css', 'js', 'ts', 'json', 'xml', 'yaml', 'yml', 'php', 'py', 'sh', 'sql'].includes(ext)) return 'text/code';
+        if (['zip', 'tar', 'gz', 'tgz', 'bz2', 'xz', '7z', 'rar'].includes(ext)) return 'package/x-generic';
+        if (['odt', 'ott', 'doc', 'docx', 'rtf'].includes(ext)) return 'x-office/document';
+        if (['ods', 'ots', 'xls', 'xlsx'].includes(ext)) return 'x-office/spreadsheet';
+        if (['odp', 'otp', 'ppt', 'pptx'].includes(ext)) return 'x-office/presentation';
         return 'application/octet-stream';
     }
 
+    function isGenericFileIcon(src = '') {
+        try {
+            return /\/filetypes\/file\.svg(?:[?#].*)?$/i.test(new URL(src, window.location.origin).pathname + (new URL(src, window.location.origin).search || ''))
+                || /\/filetypes\/application\.svg(?:[?#].*)?$/i.test(new URL(src, window.location.origin).pathname + (new URL(src, window.location.origin).search || ''));
+        } catch (e) {
+            return /\/filetypes\/(?:file|application)\.svg(?:[?#].*)?$/i.test(String(src));
+        }
+    }
+
     function iconForMime(mime = '') {
-        return window.OC?.MimeType?.getIconUrl ? OC.MimeType.getIconUrl(mime || 'application/octet-stream') : '';
+        if (!window.OC?.MimeType?.getIconUrl) return '';
+        try { return OC.MimeType.getIconUrl(mime || 'application/octet-stream'); } catch (e) { return ''; }
+    }
+
+    function iconForFileType(type = '') {
+        const filetype = type || 'file';
+        if (window.OC?.imagePath) return OC.imagePath('core', `filetypes/${filetype}.svg`);
+        return `/core/img/filetypes/${filetype}.svg`;
+    }
+
+    function fileTypeAliasForName(name = '') {
+        const ext = fileExtension(name);
+        if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'tif', 'tiff', 'heic', 'avif'].includes(ext)) return 'image';
+        if (['mp4', 'm4v', 'webm', 'mov', 'mkv', 'avi'].includes(ext)) return 'video';
+        if (['mp3', 'm4a', 'ogg', 'oga', 'flac', 'wav'].includes(ext)) return 'audio';
+        if (ext === 'pdf') return 'application-pdf';
+        if (['html', 'htm', 'css', 'js', 'ts', 'json', 'xml', 'yaml', 'yml', 'php', 'py', 'sh', 'sql'].includes(ext)) return 'text-code';
+        if (['ics'].includes(ext)) return 'text-calendar';
+        if (['vcf', 'vcard'].includes(ext)) return 'text-vcard';
+        if (['txt', 'md', 'markdown', 'log', 'csv'].includes(ext)) return 'text';
+        if (['zip', 'tar', 'gz', 'tgz', 'bz2', 'xz', '7z', 'rar'].includes(ext)) return 'package-x-generic';
+        if (['odt', 'ott', 'doc', 'docx', 'rtf'].includes(ext)) return 'x-office-document';
+        if (['ods', 'ots', 'xls', 'xlsx'].includes(ext)) return 'x-office-spreadsheet';
+        if (['odp', 'otp', 'ppt', 'pptx'].includes(ext)) return 'x-office-presentation';
+        return '';
     }
 
     function iconForFileName(name = '') {
-        return iconForMime(inferMimeFromName(name));
+        const byMime = iconForMime(inferMimeFromName(name));
+        if (byMime && !isGenericFileIcon(byMime)) return byMime;
+        const alias = fileTypeAliasForName(name);
+        return alias ? iconForFileType(alias) : byMime;
     }
 
     function readViewerFileMime(doc, title = '') {
@@ -1153,10 +1205,11 @@
             for (const img of Array.from(doc.querySelectorAll(selector))) {
                 if (img.closest('.files-list__header-recommendations, .recommendation, .files-list__row, .files-list, #app-navigation')) continue;
                 const src = img.getAttribute('src') || '';
-                if (src && !/filetypes\/file(?:\.|$)/.test(src)) return new URL(src, window.location.origin).toString();
+                if (src && !isGenericFileIcon(src)) return new URL(src, window.location.origin).toString();
             }
         }
-        return iconForMime(readViewerFileMime(doc, title));
+        const byMime = iconForMime(readViewerFileMime(doc, title));
+        return byMime && !isGenericFileIcon(byMime) ? byMime : iconForFileName(title);
     }
 
     function readFilesFolder(doc, iframe) {
@@ -1181,8 +1234,8 @@
     }
 
     function readViewerFileName(doc, iframe) {
-        const title = (doc.title || '').replace(/\s[-–]\sNextcloud.*$/i, '').trim();
-        const titleLooksLikeFile = /\.[A-Za-z0-9]{1,8}(\s|$)/.test(title);
+        const title = normalizeFileTitle((doc.title || '').replace(/\s[-–]\sNextcloud.*$/i, '').trim());
+        const titleLooksLikeFile = /\.[A-Za-z0-9]{1,8}$/.test(title);
         if (titleLooksLikeFile && title !== 'Files') return title;
         const selectors = [
             '.viewer__file-title', '.viewer__file-name', '.modal-header h2', '.modal-header__title',

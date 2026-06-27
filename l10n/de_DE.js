@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Desktop Files": "Desktop-Dateien",
     "This file manager is part of the desktop environment and is intended to be opened from the apps menu.": "Dieser Dateimanager ist Teil der Desktop-Umgebung und soll über das Apps-Menü geöffnet werden.",
     "Up": "Nach oben",
@@ -107,7 +107,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Speichern fehlgeschlagen: {msg}",
     "Desktop Settings": "Desktop-Einstellungen",
     "Save": "Speichern",
-    "Proof of Concept – may contain errors": "Proof of Concept – kann Fehler enthalten",
     "Nextcloud Version %s": "Nextcloud-Version %s",
     "Toggle fullscreen": "Vollbild umschalten",
     "Open Nextcloud in a new tab": "Nextcloud in neuem Tab öffnen",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Alle Übersetzungen sind maschinelle Übersetzungen."
 },
     "nplurals=2; plural=(n != 1);"
 );

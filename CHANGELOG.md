@@ -3,6 +3,12 @@
 All notable changes to the Desktop app are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## 0.13.4 – 2026-06-27
+
+### Fixed
+- **Native Files titlebar icons are stable across servers.** When a server only exposes the themed generic `file.svg` icon or the core mimetype alias list is unavailable on the Desktop route, opened Files windows now fall back to stable core filetype icons based on the filename extension, including titles with server-name suffixes such as `file.pdf - Example`.
+- **Desktop and settings text updated.** Removed the proof-of-concept footer warning from the desktop, added a translations disclaimer to Desktop settings, and refreshed locale coverage.
+
 ## 0.13.3 – 2026-06-27
 
 ### Fixed

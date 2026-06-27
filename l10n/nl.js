@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Toepassingen",
     "Apps": "Apps",
     "Unified search": "Geünificeerd zoeken",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Opslaan mislukt: {msg}",
     "Desktop Settings": "Bureaubladinstellingen",
     "Save": "Opslaan",
-    "Proof of Concept – may contain errors": "Proof of Concept – kan fouten bevatten",
     "Nextcloud Version %s": "Nextcloud Versie %s",
     "Toggle fullscreen": "Schakel volledig scherm in",
     "Open Nextcloud in a new tab": "Open Nextcloud in een nieuw tabblad",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Aan bureaublad toevoegen",
     "Remove from desktop": "Van bureaublad verwijderen",
     "Pinned apps": "Vastgemaakte apps",
-    "Search": "Zoeken"
+    "Search": "Zoeken",
+    "All translations are machine translations.": "Alle vertalingen zijn machinevertalingen."
 },
     "nplurals=2; plural=(n != 1);"
 );

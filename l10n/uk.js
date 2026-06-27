@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Застосунки",
     "Apps": "Застосунки",
     "Unified search": "Універсальний пошук",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Не вдалося зберегти: {msg}",
     "Desktop Settings": "Налаштування робочого столу",
     "Save": "зберегти",
-    "Proof of Concept – may contain errors": "Підтвердження концепції – може містити помилки",
     "Nextcloud Version %s": "Nextcloud Версія %s",
     "Toggle fullscreen": "Перемкнути повноекранний режим",
     "Open Nextcloud in a new tab": "Відкрийте Nextcloud в новій вкладці",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Усі переклади є машинними перекладами."
 },
     "nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);"
 );

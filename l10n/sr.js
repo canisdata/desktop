@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Апликације",
     "Apps": "Апликације",
     "Unified search": "Обједињена претрага",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Чување није успело: {msg}",
     "Desktop Settings": "Подешавања радне површине",
     "Save": "Сачувај",
-    "Proof of Concept – may contain errors": "Доказ концепта – може садржати грешке",
     "Nextcloud Version %s": "Nextcloud Верзија %с",
     "Toggle fullscreen": "Укључите цео екран",
     "Open Nextcloud in a new tab": "Отворите Nextcloud у новој картици",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Сви преводи су машински преводи."
 },
     "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"
 );

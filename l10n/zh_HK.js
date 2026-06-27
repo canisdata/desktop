@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "應用程式",
     "Apps": "應用程式",
     "Unified search": "統一搜尋",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "儲存失敗：{msg}",
     "Desktop Settings": "桌面設定",
     "Save": "儲存",
-    "Proof of Concept – may contain errors": "概念驗證 – 可能包含錯誤",
     "Nextcloud Version %s": "Nextcloud 版本 %s",
     "Toggle fullscreen": "切換全螢幕",
     "Open Nextcloud in a new tab": "在新分頁中開啟 Nextcloud",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "所有翻譯均為機器翻譯。"
 },
     "nplurals=1; plural=0;"
 );

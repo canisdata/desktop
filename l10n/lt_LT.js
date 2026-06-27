@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Programėlės",
     "Apps": "Programėlės",
     "Unified search": "Vieninga paieška",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Įrašyti nepavyko: {msg}",
     "Desktop Settings": "Darbalaukio nustatymai",
     "Save": "Išsaugoti",
-    "Proof of Concept – may contain errors": "Koncepcijos įrodymas – gali būti klaidų",
     "Nextcloud Version %s": "Nextcloud %s versija",
     "Toggle fullscreen": "Perjungti viso ekrano režimą",
     "Open Nextcloud in a new tab": "Atidarykite Nextcloud naujame skirtuke",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Visi vertimai yra mašininiai vertimai."
 },
     "nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);"
 );

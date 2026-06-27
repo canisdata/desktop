@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "ແອັບພລິເຄຊັນ",
     "Apps": "ແອັບພລິເຄຊັນ",
     "Unified search": "Unified search",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "ບັນທຶກລົ້ມເຫລວ: {msg}",
     "Desktop Settings": "ການຕັ້ງຄ່າ Desktop",
     "Save": "ບັນທຶກ",
-    "Proof of Concept – may contain errors": "ຫຼັກຖານສະແດງແນວຄວາມຄິດ – ອາດຈະມີຄວາມຜິດພາດ",
     "Nextcloud Version %s": "Nextcloud ລຸ້ນ %s",
     "Toggle fullscreen": "ສະຫຼັບເຕັມຈໍ",
     "Open Nextcloud in a new tab": "ເປີດ Nextcloud ໃນແຖບໃໝ່",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "ການແປທັງໝົດແມ່ນການແປດ້ວຍເຄື່ອງ."
 },
     "nplurals=1; plural=0;"
 );

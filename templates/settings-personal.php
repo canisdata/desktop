@@ -70,4 +70,5 @@ $l = \OC::$server->getL10N('desktop_workspace');
     </p>
 
     <p class="settings-hint" style="margin-top:16px;"><?= p($l->t('Changes are applied immediately.')) ?> <span id="desktop-save-status" class="desktop-admin-status" aria-live="polite"></span></p>
+    <p class="settings-hint"><?= p($l->t('All translations are machine translations.')) ?></p>
 </div>

@@ -107,7 +107,6 @@
         "Save failed: {msg}": "Det gick inte att spara: {msg}",
         "Desktop Settings": "Skrivbordsinställningar",
         "Save": "Spara",
-        "Proof of Concept – may contain errors": "Proof of Concept – kan innehålla fel",
         "Nextcloud Version %s": "Nextcloud Version %s",
         "Toggle fullscreen": "Växla helskärm",
         "Open Nextcloud in a new tab": "Öppna Nextcloud i en ny flik",
@@ -215,7 +214,8 @@
         "Add to desktop": "Add to desktop",
         "Remove from desktop": "Remove from desktop",
         "Pinned apps": "Pinned apps",
-        "Search": "Search"
+        "Search": "Search",
+        "All translations are machine translations.": "Alla översättningar är maskinöversättningar."
     },
     "pluralForm": "nplurals=2; plural=(n != 1);"
 }

@@ -107,7 +107,6 @@
         "Save failed: {msg}": "Saqlash muvaffaqiyatsiz tugadi: {msg}",
         "Desktop Settings": "Ish stoli sozlamalari",
         "Save": "Saqlash",
-        "Proof of Concept – may contain errors": "Kontseptsiya isboti - xatolar bo'lishi mumkin",
         "Nextcloud Version %s": "Nextcloud Versiya %s",
         "Toggle fullscreen": "Toʻliq ekranga oʻtish",
         "Open Nextcloud in a new tab": "Nextcloud yangi varaqda oching",
@@ -215,7 +214,8 @@
         "Add to desktop": "Add to desktop",
         "Remove from desktop": "Remove from desktop",
         "Pinned apps": "Pinned apps",
-        "Search": "Search"
+        "Search": "Search",
+        "All translations are machine translations.": "Barcha tarjimalar mashina tarjimalaridir."
     },
     "pluralForm": "nplurals=1; plural=0;"
 }

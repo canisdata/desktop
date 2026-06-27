@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Rakendused",
     "Apps": "Rakendused",
     "Unified search": "Ühendatud otsing",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Salvestamine ebaõnnestus: {msg}",
     "Desktop Settings": "Töölaua sätted",
     "Save": "Salvesta",
-    "Proof of Concept – may contain errors": "Kontseptsiooni tõend – võib sisaldada vigu",
     "Nextcloud Version %s": "Nextcloud Versioon %s",
     "Toggle fullscreen": "Lülitage täisekraan sisse",
     "Open Nextcloud in a new tab": "Avage Nextcloud uuel vahelehel",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Kõik tõlked on masintõlked."
 },
     "nplurals=2; plural=(n != 1);"
 );

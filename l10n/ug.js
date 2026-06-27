@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "قوللىنىشچان پروگراممىلار",
     "Apps": "ئەپلەر",
     "Unified search": "بىرلىككە كەلگەن ئىزدەش",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "ساقلاش مەغلۇپ بولدى: {msg}",
     "Desktop Settings": "ئۈستەلئۈستى تەڭشىكى",
     "Save": "ساقلاش",
-    "Proof of Concept – may contain errors": "ئۇقۇمنىڭ ئىسپاتى - خاتالىق بولۇشى مۇمكىن",
     "Nextcloud Version %s": "Nextcloud نەشرى% s",
     "Toggle fullscreen": "پۈتۈن ئېكراننى ئالماشتۇرۇڭ",
     "Open Nextcloud in a new tab": "يېڭى بەتكۈچتە Nextcloud نى ئېچىڭ",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "بارلىق تەرجىمىلەر ماشىنا تەرجىمىسىدۇر."
 },
     "nplurals=2; plural=(n != 1);"
 );

@@ -107,7 +107,6 @@
         "Save failed: {msg}": "ບັນທຶກລົ້ມເຫລວ: {msg}",
         "Desktop Settings": "ການຕັ້ງຄ່າ Desktop",
         "Save": "ບັນທຶກ",
-        "Proof of Concept – may contain errors": "ຫຼັກຖານສະແດງແນວຄວາມຄິດ – ອາດຈະມີຄວາມຜິດພາດ",
         "Nextcloud Version %s": "Nextcloud ລຸ້ນ %s",
         "Toggle fullscreen": "ສະຫຼັບເຕັມຈໍ",
         "Open Nextcloud in a new tab": "ເປີດ Nextcloud ໃນແຖບໃໝ່",
@@ -215,7 +214,8 @@
         "Add to desktop": "Add to desktop",
         "Remove from desktop": "Remove from desktop",
         "Pinned apps": "Pinned apps",
-        "Search": "Search"
+        "Search": "Search",
+        "All translations are machine translations.": "ການແປທັງໝົດແມ່ນການແປດ້ວຍເຄື່ອງ."
     },
     "pluralForm": "nplurals=1; plural=0;"
 }

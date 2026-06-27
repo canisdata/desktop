@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "აპები",
     "Unified search": "გაერთიანებული ძებნა",
     "Search contacts": "კონტაქტების ძებნა",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "შენახვა ვერ მოხერხდა: {msg}",
     "Desktop Settings": "დესკტოპის პარამეტრები",
     "Save": "შენახვა",
-    "Proof of Concept – may contain errors": "კონცეფციის დადასტურება - შეიძლება შეიცავდეს შეცდომებს",
     "Nextcloud Version %s": "Nextcloud ვერსია %s",
     "Toggle fullscreen": "სრულ ეკრანზე გადართვა",
     "Open Nextcloud in a new tab": "გახსენით Nextcloud ახალ ჩანართში",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "ყველა თარგმანი მანქანური თარგმანია."
 },
     "nplurals=2; plural=(n!=1);"
 );

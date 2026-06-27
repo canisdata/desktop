@@ -19,7 +19,6 @@ try {
         <div class="desktop-wallpaper-credit" aria-hidden="true">
             <span>Desktop by canisdata.de</span>
             <span><?= p($l->t('Version %s', [$desktopVersion])) ?></span>
-            <span><?= p($l->t('Proof of Concept – may contain errors')) ?></span>
             <span><?= p($l->t('Nextcloud Version %s', [$ncVersion])) ?></span>
         </div>
     </main>

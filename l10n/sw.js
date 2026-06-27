@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Maombi",
     "Apps": "Maombi",
     "Unified search": "Utafutaji wa umoja",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Imeshindwa kuhifadhi: {msg}",
     "Desktop Settings": "Mipangilio ya Eneo-kazi",
     "Save": "Hifadhi",
-    "Proof of Concept – may contain errors": "Uthibitisho wa Dhana - inaweza kuwa na makosa",
     "Nextcloud Version %s": "Nextcloud Toleo %s",
     "Toggle fullscreen": "Geuza skrini nzima",
     "Open Nextcloud in a new tab": "Fungua Nextcloud katika kichupo kipya",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Tafsiri zote ni tafsiri za mashine."
 },
     "nplurals=2; plural=(n != 1);"
 );

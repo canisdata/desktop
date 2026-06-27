@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "برنامه‌ها",
     "Apps": "  برنامه ها",
     "Unified search": "جستجوی یکپارچه.",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "ذخیره انجام نشد: {msg}",
     "Desktop Settings": "تنظیمات دسکتاپ",
     "Save": "ذخیره کنید",
-    "Proof of Concept – may contain errors": "اثبات مفهوم - ممکن است حاوی خطا باشد",
     "Nextcloud Version %s": "Nextcloud نسخه %s",
     "Toggle fullscreen": "تمام صفحه را تغییر دهید",
     "Open Nextcloud in a new tab": "Nextcloud را در یک برگه جدید باز کنید",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "همه ترجمه‌ها، ترجمه ماشینی هستند."
 },
     "nplurals=2; plural=(n > 1);"
 );

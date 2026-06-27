@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Aplikasi",
     "Unified search": "Pencarian terpadu",
     "Search contacts": "Cari kontak",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Gagal menyimpan: {msg}",
     "Desktop Settings": "Pengaturan Desktop",
     "Save": "Simpan",
-    "Proof of Concept – may contain errors": "Bukti Konsep – mungkin mengandung kesalahan",
     "Nextcloud Version %s": "Nextcloud Versi %s",
     "Toggle fullscreen": "Beralih ke layar penuh",
     "Open Nextcloud in a new tab": "Buka Nextcloud di tab baru",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Semua terjemahan adalah terjemahan mesin."
 },
     "nplurals=1; plural=0;"
 );

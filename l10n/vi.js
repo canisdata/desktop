@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Apps": "Ứng dụng",
     "Search contacts": "Tìm kiếm liên hệ",
     "Settings menu": "Menu cài đặt",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Lưu không thành công: {msg}",
     "Desktop Settings": "Cài đặt máy tính để bàn",
     "Save": "Lưu",
-    "Proof of Concept – may contain errors": "Bằng chứng về khái niệm - có thể có lỗi",
     "Nextcloud Version %s": "Nextcloud Phiên bản %s",
     "Toggle fullscreen": "Chuyển đổi toàn màn hình",
     "Open Nextcloud in a new tab": "Mở Nextcloud trong tab mới",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Tất cả bản dịch đều là bản dịch máy."
 },
     "nplurals=1; plural=0;"
 );

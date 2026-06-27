@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Feidhmchláir",
     "Apps": "Feidhmchláir",
     "Unified search": "Cuardach aontaithe",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Theip ar shábháil: {msg}",
     "Desktop Settings": "Socruithe Deisce",
     "Save": "Sábháil",
-    "Proof of Concept – may contain errors": "Cruthúnas ar Choincheap – d’fhéadfadh earráidí a bheith ann",
     "Nextcloud Version %s": "Nextcloud Leagan %s",
     "Toggle fullscreen": "Scoránaigh lánscáileán",
     "Open Nextcloud in a new tab": "Oscail Nextcloud i gcluaisín nua",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Is aistriúcháin mheaisín iad na haistriúcháin uile."
 },
     "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);"
 );

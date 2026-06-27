@@ -107,7 +107,6 @@
         "Save failed: {msg}": "Falha ao salvar: {msg}",
         "Desktop Settings": "Configurações da área de trabalho",
         "Save": "Salvar",
-        "Proof of Concept – may contain errors": "Prova de conceito – pode conter erros",
         "Nextcloud Version %s": "Nextcloud Versão %s",
         "Toggle fullscreen": "Alternar tela cheia",
         "Open Nextcloud in a new tab": "Abra Nextcloud em uma nova guia",
@@ -215,7 +214,8 @@
         "Add to desktop": "Adicionar ao ambiente de trabalho",
         "Remove from desktop": "Remover do ambiente de trabalho",
         "Pinned apps": "Aplicações fixadas",
-        "Search": "Pesquisar"
+        "Search": "Pesquisar",
+        "All translations are machine translations.": "Todas as traduções são traduções automáticas."
     },
     "pluralForm": "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }

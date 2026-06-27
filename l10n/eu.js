@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "Aplikazioak",
     "Apps": "Aplikazioak",
     "Unified search": "Bilaketa bateratua",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "Ezin izan da gorde: {msg}",
     "Desktop Settings": "Mahaigaineko ezarpenak",
     "Save": "Gorde",
-    "Proof of Concept – may contain errors": "Kontzeptuaren froga: akatsak izan ditzake",
     "Nextcloud Version %s": "Nextcloud %s bertsioa",
     "Toggle fullscreen": "Aldatu pantaila osoa",
     "Open Nextcloud in a new tab": "Ireki Nextcloud fitxa berri batean",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "Itzulpen guztiak itzulpen automatikoak dira."
 },
     "nplurals=2; plural=(n != 1);"
 );

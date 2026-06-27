@@ -1,6 +1,6 @@
 OC.L10N.register(
     "desktop_workspace",
-    {
+{
     "Applications": "التطبيقات",
     "Apps": "التطبيقات",
     "Unified search": "البحث الموحد",
@@ -108,7 +108,6 @@ OC.L10N.register(
     "Save failed: {msg}": "فشل الحفظ: {msg}",
     "Desktop Settings": "إعدادات سطح المكتب",
     "Save": "حفظ",
-    "Proof of Concept – may contain errors": "إثبات المفهوم - قد يحتوي على أخطاء",
     "Nextcloud Version %s": "Nextcloud الإصدار %s",
     "Toggle fullscreen": "تبديل ملء الشاشة",
     "Open Nextcloud in a new tab": "افتح Nextcloud في علامة تبويب جديدة",
@@ -216,7 +215,8 @@ OC.L10N.register(
     "Add to desktop": "Add to desktop",
     "Remove from desktop": "Remove from desktop",
     "Pinned apps": "Pinned apps",
-    "Search": "Search"
+    "Search": "Search",
+    "All translations are machine translations.": "جميع الترجمات هي ترجمات آلية."
 },
     "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;"
 );
